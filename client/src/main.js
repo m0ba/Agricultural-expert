@@ -7,7 +7,7 @@ import './assets/styles.css';
 async function boot() {
   if (window.Capacitor?.isNativePlatform?.()) {
     try {
-      const { NodeJS } = await import('@nicokoenig/capacitor-nodejs');
+      const { NodeJS } = await import('@choreruiz/capacitor-node-js');
       await NodeJS.start({ script: 'server/index.js', options: {} });
       console.log('[App] Node.js server started on device');
       await new Promise(r => setTimeout(r, 3000));

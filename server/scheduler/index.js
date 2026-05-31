@@ -1,4 +1,10 @@
 import cron from 'node-cron';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 let initialized = false;
 
@@ -51,7 +57,7 @@ export function initScheduler() {
     try {
       const { runRuleEngine } = await import('../services/ruleEngine.js');
       const { getCurrentWeather } = await import('../services/weatherService.js');
-      const { readYaml, writeYaml } = await import('./yamlUtils.js');
+      const { readYaml, writeYaml } = await import('../services/yamlUtils.js');
       const config = readYaml(path.join(__dirname, '..', 'data', 'config.yml')) || {};
       const operations = readYaml(path.join(__dirname, '..', 'data', 'operations.yml')) || [];
       
@@ -78,7 +84,7 @@ export function initScheduler() {
     console.log(`[Scheduler] Auto AI analysis triggered at ${new Date().toISOString()}`);
     try {
       const { analyzeWithAI } = await import('../services/aiService.js');
-      const { readYaml, writeYaml } = await import('./yamlUtils.js');
+      const { readYaml, writeYaml } = await import('../services/yamlUtils.js');
       const config = readYaml(path.join(__dirname, '..', 'data', 'config.yml')) || {};
       
       if (!config.ai?.enabled) {

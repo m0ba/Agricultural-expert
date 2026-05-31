@@ -25,8 +25,13 @@ const router = createRouter({
 // Guard: redirect to setup if not initialized
 router.beforeEach(async (to, from, next) => {
   if (to.path === '/setup') return next();
+  const bootState = window.__bootState;
+  if (bootState?.isNative && !bootState.serverReady) {
+    return next();
+  }
   try {
-    const res = await fetch('/api/config');
+    const baseUrl = window.Capacitor?.isNativePlatform?.() ? 'http://127.0.0.1:3000' : '';
+    const res = await fetch(`${baseUrl}/api/config`);
     const config = await res.json();
     if (!config.initialized) return next('/setup');
   } catch (e) { /* server not running yet */ }

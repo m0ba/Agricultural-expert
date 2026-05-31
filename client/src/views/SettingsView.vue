@@ -333,6 +333,10 @@
               <option value="其他">其他</option>
             </select>
           </div>
+          <div v-if="newCrop.variety_name === '其他'" class="form-group">
+            <label class="form-label">自定义品种名称</label>
+            <input v-model="newCrop.custom_variety_name" class="form-input" maxlength="12" placeholder="最多12个字" />
+          </div>
           <div class="form-group">
             <label class="form-label">定植日期 <span class="required">*</span></label>
             <input type="date" v-model="newCrop.planting_date" class="form-input" />
@@ -1107,7 +1111,7 @@ const newGreenhouse = reactive({
 
 const showAddCrop = ref(false);
 const newCrop = reactive({
-  greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '',
+  greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '', custom_variety_name: '',
   planting_date: '', current_stage: '育苗期', quantity: 1000,
   seed_source: '国产品种', nursery_method: '自育苗', seedling_age: 15,
   grafted: '否', prev_crop: '', target_yield: 0, stage_detail: {},
@@ -1469,7 +1473,7 @@ async function editCropStage(crop) {
   const confirmed = await window.__modal.showConfirm(`确认将 ${crop.type} ${crop.variety_name} 的阶段修改为 ${newStage}？`, '确认修改');
   if (!confirmed) return;
   try {
-    await axios.put(`/api/crops/${crop.id}`, { current_stage: newStage });
+    await axios.put(`/api/crops/${crop.id}`, { current_stage: newStage, stage_detail: {} });
     await loadConfig();
   } catch (err) { window.__modal.showToast('修改失败', 'error'); }
 }
@@ -1510,7 +1514,13 @@ async function loadAddCropVarieties(cropType) {
 }
 
 async function loadAddCropStages(cropType) {
-  if (!cropType || cropType === '其他') { addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期']; addStageDetailFields.value = []; return; }
+  if (!cropType || cropType === '其他') {
+    addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
+    const defaults = getDefaultStageFields();
+    addCropStageDetailsMap.value = defaults;
+    addStageDetailFields.value = [];
+    return;
+  }
   try {
     const res = await axios.get(`/api/knowledge/crops/${cropType}`);
     if (res.data?.stages?.length) {
@@ -1521,40 +1531,75 @@ async function loadAddCropStages(cropType) {
       }
     } else {
       addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
-      addCropStageDetailsMap.value = {};
+      addCropStageDetailsMap.value = getDefaultStageFields();
     }
   } catch (e) {
     addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
-    addCropStageDetailsMap.value = {};
+    addCropStageDetailsMap.value = getDefaultStageFields();
   }
+}
+
+function getDefaultStageFields() {
+  return {
+    '育苗期': [
+      { name: '苗龄天数', type: 'stepper', min: 1, max: 60, step: 1 },
+      { name: '出苗情况', type: 'select', options: ['未出苗', '刚出苗', '出苗整齐', '出苗不齐'] },
+      { name: '苗情长势', type: 'select', options: ['健壮', '偏弱', '徒长', '蹲苗中'] }
+    ],
+    '定植缓苗期': [
+      { name: '定植天数', type: 'stepper', min: 1, max: 30, step: 1 },
+      { name: '缓苗状态', type: 'select', options: ['未缓苗', '缓苗中', '缓苗完成'] },
+      { name: '叶片表现', type: 'select', options: ['正常挺立', '轻微萎蔫', '严重萎蔫', '叶缘发黄'] }
+    ],
+    '初花期': [
+      { name: '开花状态', type: 'select', options: ['现蕾', '花朵开放', '授粉完成', '坐果中'] },
+      { name: '花朵数量', type: 'stepper', min: 0, max: 100, step: 1 },
+      { name: '侧枝状态', type: 'select', options: ['未处理', '已打杈', '需要打杈'] }
+    ],
+    '盛果期': [
+      { name: '果实状态', type: 'select', options: ['幼果', '膨大期', '接近成熟', '成熟可采'] },
+      { name: '挂果数量', type: 'stepper', min: 0, max: 100, step: 1 },
+      { name: '植株长势', type: 'select', options: ['旺盛', '正常', '偏弱', '早衰迹象'] }
+    ],
+    '采收期': [
+      { name: '采收阶段', type: 'select', options: ['始收期', '采收盛期', '采收后期'] },
+      { name: '果实品质', type: 'select', options: ['优', '良', '一般', '较差'] },
+      { name: '植株状态', type: 'select', options: ['正常挂果', '挂果减少', '叶片衰老', '准备拉秧'] }
+    ]
+  };
 }
 
 const addCropStageDetailsMap = ref({});
 
 function onNewCropTypeChange() {
   newCrop.variety_name = '';
+  newCrop.custom_variety_name = '';
   newCrop.stage_detail = {};
   newCrop.rotation_hint = '';
   const ct = newCrop.crop_type;
   if (ct && ct !== '其他') {
     loadAddCropVarieties(ct);
-    loadAddCropStages(ct);
+    loadAddCropStages(ct).then(() => onNewStageChange());
   } else {
     addCropVarieties.value = [];
     addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
     addStageDetailFields.value = [];
     addCropStageDetailsMap.value = {};
+    onNewStageChange();
   }
 }
 
 function onNewStageChange() {
   newCrop.stage_detail = {};
   const stage = newCrop.current_stage;
-  const fields = addCropStageDetailsMap.value[stage] || [];
+  const defaultFields = getDefaultStageFields();
+  const fields = addCropStageDetailsMap.value[stage] || defaultFields[stage] || [];
   addStageDetailFields.value = fields;
   for (const field of fields) {
     if (field.type === 'stepper') {
       newCrop.stage_detail[field.name] = field.min || 0;
+    } else if (field.type === 'select') {
+      newCrop.stage_detail[field.name] = '';
     }
   }
 }
@@ -1619,11 +1664,12 @@ async function submitNewCrop() {
   try {
     const payload = {
       ...newCrop,
-      crop_type: newCrop.crop_type === '其他' ? newCrop.custom_name : newCrop.crop_type
+      crop_type: newCrop.crop_type === '其他' ? newCrop.custom_name : newCrop.crop_type,
+      variety_name: newCrop.variety_name === '其他' ? (newCrop.custom_variety_name || '其他') : newCrop.variety_name
     };
     await axios.post('/api/crops', payload);
     showAddCrop.value = false;
-    Object.assign(newCrop, { greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '', planting_date: '', current_stage: '育苗期', quantity: 1000, seed_source: '国产品种', nursery_method: '自育苗', seedling_age: 15, grafted: '否', prev_crop: '', target_yield: 0, stage_detail: {}, rotation_hint: '', rotation_ok: true });
+    Object.assign(newCrop, { greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '', custom_variety_name: '', planting_date: '', current_stage: '育苗期', quantity: 1000, seed_source: '国产品种', nursery_method: '自育苗', seedling_age: 15, grafted: '否', prev_crop: '', target_yield: 0, stage_detail: {}, rotation_hint: '', rotation_ok: true });
     addStageDetailFields.value = [];
     await loadConfig();
     if (window.__modal) window.__modal.showToast('作物添加成功', 'success');

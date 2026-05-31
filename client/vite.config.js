@@ -58,6 +58,11 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    rollupOptions: {
+      external: ['@choreruiz/capacitor-node-js']
+    }
+  },
   server: {
     port: 5173,
     proxy: {

@@ -190,6 +190,11 @@
           </select>
         </div>
 
+        <div v-if="crop.variety_name === '其他'" class="form-group">
+          <label class="form-label">自定义品种名称</label>
+          <input v-model="crop.custom_variety_name" class="form-input" maxlength="12" placeholder="最多12个字" />
+        </div>
+
         <div class="form-group">
           <label class="form-label">定植日期</label>
           <input type="date" v-model="crop.planting_date" class="form-input" />
@@ -610,7 +615,7 @@ function createGreenhouse() {
 }
 
 function createCrop() {
-  return { id: 'crop_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '', planting_date: '', current_stage: '', quantity: 1000, seed_source: '国产品种', nursery_method: '自育苗', seedling_age: 15, grafted: '否', prev_crop: '', target_yield: 0, stage_detail: {}, rotation_hint: '', rotation_ok: true };
+  return { id: 'crop_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6), greenhouse_id: '', crop_type: '', custom_name: '', variety_name: '', custom_variety_name: '', planting_date: '', current_stage: '', quantity: 1000, seed_source: '国产品种', nursery_method: '自育苗', seedling_age: 15, grafted: '否', prev_crop: '', target_yield: 0, stage_detail: {}, rotation_hint: '', rotation_ok: true };
 }
 
 function addGreenhouse() { form.greenhouses.push(createGreenhouse()); }
@@ -626,6 +631,7 @@ function stepValue(obj, key, delta, min, max) {
 
 function onCropTypeChange(crop) {
   crop.variety_name = '';
+  crop.custom_variety_name = '';
   crop.stage_detail = {};
   if (crop.crop_type && crop.crop_type !== '其他') {
     loadVarieties(crop.crop_type);
@@ -660,11 +666,11 @@ function getStages(cropType) {
 
 // Stage detail fields from knowledge (reactive)
 const stageDetailCache = vueReactive({});
+const defaultStageFields = getDefaultStageDetailFields();
 function getStageDetailFields(cropType, stageName) {
   const cacheKey = `${cropType}_${stageName}`;
   if (stageDetailCache[cacheKey]) return stageDetailCache[cacheKey];
-  // Will be loaded from knowledge
-  return [];
+  return defaultStageFields[stageName] || [];
 }
 
 async function loadStageDetails(cropType) {
@@ -677,8 +683,41 @@ async function loadStageDetails(cropType) {
       }
     }
   } catch (e) {
-    // Failed to load, will use empty arrays
+    const defaults = getDefaultStageDetailFields();
+    for (const [stageName, fields] of Object.entries(defaults)) {
+      stageDetailCache[`${cropType}_${stageName}`] = fields;
+    }
   }
+}
+
+function getDefaultStageDetailFields() {
+  return {
+    '育苗期': [
+      { name: '苗龄天数', type: 'stepper', min: 1, max: 60, step: 1 },
+      { name: '出苗情况', type: 'select', options: ['未出苗', '刚出苗', '出苗整齐', '出苗不齐'] },
+      { name: '苗情长势', type: 'select', options: ['健壮', '偏弱', '徒长', '蹲苗中'] }
+    ],
+    '定植缓苗期': [
+      { name: '定植天数', type: 'stepper', min: 1, max: 30, step: 1 },
+      { name: '缓苗状态', type: 'select', options: ['未缓苗', '缓苗中', '缓苗完成'] },
+      { name: '叶片表现', type: 'select', options: ['正常挺立', '轻微萎蔫', '严重萎蔫', '叶缘发黄'] }
+    ],
+    '初花期': [
+      { name: '开花状态', type: 'select', options: ['现蕾', '花朵开放', '授粉完成', '坐果中'] },
+      { name: '花朵数量', type: 'stepper', min: 0, max: 100, step: 1 },
+      { name: '侧枝状态', type: 'select', options: ['未处理', '已打杈', '需要打杈'] }
+    ],
+    '盛果期': [
+      { name: '果实状态', type: 'select', options: ['幼果', '膨大期', '接近成熟', '成熟可采'] },
+      { name: '挂果数量', type: 'stepper', min: 0, max: 100, step: 1 },
+      { name: '植株长势', type: 'select', options: ['旺盛', '正常', '偏弱', '早衰迹象'] }
+    ],
+    '采收期': [
+      { name: '采收阶段', type: 'select', options: ['始收期', '采收盛期', '采收后期'] },
+      { name: '果实品质', type: 'select', options: ['优', '良', '一般', '较差'] },
+      { name: '植株状态', type: 'select', options: ['正常挂果', '挂果减少', '叶片衰老', '准备拉秧'] }
+    ]
+  };
 }
 
 function onStageChange(crop) {
@@ -688,6 +727,8 @@ function onStageChange(crop) {
     for (const field of fields) {
       if (field.type === 'stepper') {
         crop.stage_detail[field.name] = field.min || 0;
+      } else if (field.type === 'select') {
+        crop.stage_detail[field.name] = '';
       }
     }
   }
@@ -890,7 +931,8 @@ async function submitInit() {
       crops: form.crops.map(c => ({
         ...c,
         type: c.crop_type === '其他' ? c.custom_name : c.crop_type,
-        name: c.crop_type === '其他' ? c.custom_name : c.crop_type
+        name: c.crop_type === '其他' ? c.custom_name : c.crop_type,
+        variety_name: c.variety_name === '其他' ? (c.custom_variety_name || '其他') : c.variety_name
       })),
       cultivation_method: form.cultivation_method,
       soil: form.cultivation_method === '土壤栽培' ? form.soil : null,

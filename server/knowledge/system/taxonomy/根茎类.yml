@@ -1,0 +1,31 @@
+# 根茎类 - 共性知识
+category: 根茎类
+
+common_traits:
+  temperature: 喜冷凉，适宜温度15-20°C
+  humidity: 适宜相对湿度60-75%
+  light: 需充足光照
+  soil: 喜疏松深厚土壤，避免板结
+  water: 膨大期需水均匀，不可忽干忽湿
+
+common_diseases:
+  - 软腐病
+  - 黑腐病
+  - 黑斑病
+  - 疮痂病
+
+common_pests:
+  - 地下害虫
+  - 蚜虫
+  - 菜青虫
+
+management_points:
+  - 膨大期需钾肥充足
+  - 土壤疏松避免畸形
+  - 适时采收防止糠心
+  - 轮作减少土传病害
+
+crops:
+  - 萝卜
+  - 胡萝卜
+  - 土豆

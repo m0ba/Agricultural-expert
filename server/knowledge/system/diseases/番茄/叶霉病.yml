@@ -1,0 +1,56 @@
+# 叶霉病
+name: 叶霉病
+alias: 黑毛病
+pathogen_type: 真菌
+pathogen_name: Fulvia fulva
+crops: [番茄]
+
+symptoms:
+  leaf: 叶片正面出现黄色病斑，背面生灰紫色至黑褐色霉层
+  stem: 严重时茎部也出现霉层
+  fruit: 果蒂部出现霉层
+
+conditions:
+  temperature: "20-25°C"
+  humidity: "相对湿度>85%"
+  season: 全生育期，春季多发
+  triggers: [通风不良, 湿度过高, 连续阴天]
+
+agricultural_control:
+  - 通风排湿
+  - 选用抗病品种
+  - 及时摘除病叶
+  - 控制种植密度
+  - 平衡施肥
+  - 轮作
+
+chemical_control:
+  - name: 甲基硫菌灵
+    dilution: 800倍
+    interval: 7天
+    method: 喷雾
+  - name: 氟硅唑
+    dilution: 4000倍
+    interval: 10天
+    method: 喷雾
+  - name: 苯醚甲环唑
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+  - name: 嘧菌酯
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 多抗霉素
+  - 武夷菌素
+
+risk_model:
+  temp_range: [20, 25]
+  humidity_threshold: 85
+  rain_days_trigger: 3
+  risk_level_map:
+    high: "温度20-25°C + 湿度>85% + 连续阴天3天以上"
+    medium: "温度20-25°C + 湿度>75%"
+    low: "其他情况"

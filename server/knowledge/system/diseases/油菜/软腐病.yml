@@ -1,0 +1,28 @@
+# 软腐病
+name: 软腐病
+alias: 烂叶病
+pathogen_type: 细菌
+pathogen_name: Pectobacterium carotovorum
+crops: [油菜]
+
+symptoms:
+  leaf: 叶片水渍状腐烂，有恶臭味
+  stem: 茎基部软腐
+
+conditions:
+  temperature: "25-30°C"
+  humidity: "高湿多雨易发"
+  season: 生长中后期高发
+  triggers: [田间积水, 机械伤口, 虫害伤口]
+
+agricultural_control:
+  - 高畦栽培，避免田间积水
+  - 减少机械损伤
+  - 及时防治害虫减少伤口
+  - 适时采收避免过熟
+
+chemical_control:
+  - name: 农用链霉素
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾

@@ -1,0 +1,56 @@
+# 早疫病
+name: 早疫病
+alias: 轮纹病
+pathogen_type: 真菌
+pathogen_name: Alternaria solani
+crops: [番茄]
+
+symptoms:
+  stem: 茎部出现椭圆形黑褐色病斑，有同心轮纹
+  leaf: 叶片出现圆形或椭圆形病斑，有明显同心轮纹，边缘有黄色晕圈
+  fruit: 果实出现凹陷黑斑，有同心轮纹
+
+conditions:
+  temperature: "25-30°C"
+  humidity: "相对湿度>80%时易发"
+  season: 全生育期可发生，盛果期高发
+  triggers: [高温高湿, 通风不良, 植株衰弱]
+
+agricultural_control:
+  - 合理密植，改善通风
+  - 及时摘除病叶病果
+  - 平衡施肥避免偏施氮肥
+  - 控制棚内湿度
+  - 轮作换茬
+  - 收获后彻底清园
+
+chemical_control:
+  - name: 代森锰锌
+    dilution: 800倍
+    interval: 7天
+    method: 喷雾
+  - name: 百菌清
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+  - name: 异菌脲
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+  - name: 吡唑醚菌酯
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 枯草芽孢杆菌
+  - 木霉菌
+
+risk_model:
+  temp_range: [25, 30]
+  humidity_threshold: 80
+  rain_days_trigger: 3
+  risk_level_map:
+    high: "温度25-30°C + 湿度>80% + 连续3天以上降雨"
+    medium: "温度20-30°C + 湿度>70%"
+    low: "其他情况"

@@ -1,0 +1,204 @@
+# 天气-病害风险评估模型
+# 覆盖番茄6种、黄瓜6种、辣椒6种 = 18种有风险评估模型的病害
+
+models:
+  # === 番茄 ===
+  番茄_早疫病:
+    crop: 番茄
+    disease: 早疫病
+    temp_range: [25, 30]
+    humidity_threshold: 80
+    rain_days_trigger: 3
+    risk_factors:
+      high: { temp: [25, 30], humidity: [80, 100], rain_days: 3 }
+      medium: { temp: [20, 35], humidity: [70, 80], rain_days: 1 }
+      low: {}
+
+  番茄_晚疫病:
+    crop: 番茄
+    disease: 晚疫病
+    temp_range: [15, 25]
+    humidity_threshold: 90
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [15, 25], humidity: [90, 100], rain_days: 2 }
+      medium: { temp: [15, 25], humidity: [80, 90], rain_days: 1 }
+      low: {}
+
+  番茄_灰霉病:
+    crop: 番茄
+    disease: 灰霉病
+    temp_range: [15, 25]
+    humidity_threshold: 90
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [15, 25], humidity: [90, 100], rain_days: 2 }
+      medium: { temp: [15, 25], humidity: [80, 90] }
+      low: {}
+
+  番茄_叶霉病:
+    crop: 番茄
+    disease: 叶霉病
+    temp_range: [20, 25]
+    humidity_threshold: 85
+    rain_days_trigger: 3
+    risk_factors:
+      high: { temp: [20, 25], humidity: [85, 100], rain_days: 3 }
+      medium: { temp: [20, 25], humidity: [75, 85] }
+      low: {}
+
+  番茄_病毒病:
+    crop: 番茄
+    disease: 病毒病
+    temp_range: [25, 35]
+    humidity_threshold: 40
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [30, 40], humidity: [0, 40] }
+      medium: { temp: [25, 30], humidity: [40, 60] }
+      low: {}
+
+  番茄_脐腐病:
+    crop: 番茄
+    disease: 脐腐病
+    temp_range: [30, 40]
+    humidity_threshold: 50
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [35, 45], humidity: [0, 50] }
+      medium: { temp: [30, 35], humidity: [0, 60] }
+      low: {}
+
+  # === 黄瓜 ===
+  黄瓜_霜霉病:
+    crop: 黄瓜
+    disease: 霜霉病
+    temp_range: [15, 22]
+    humidity_threshold: 85
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [15, 22], humidity: [85, 100], rain_days: 2 }
+      medium: { temp: [15, 22], humidity: [75, 85] }
+      low: {}
+
+  黄瓜_白粉病:
+    crop: 黄瓜
+    disease: 白粉病
+    temp_range: [16, 24]
+    humidity_threshold: 75
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [16, 24], humidity: [60, 80] }
+      medium: { temp: [16, 28], humidity: [50, 60] }
+      low: {}
+
+  黄瓜_灰霉病:
+    crop: 黄瓜
+    disease: 灰霉病
+    temp_range: [15, 25]
+    humidity_threshold: 90
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [15, 25], humidity: [90, 100], rain_days: 2 }
+      medium: { temp: [15, 25], humidity: [80, 90] }
+      low: {}
+
+  黄瓜_枯萎病:
+    crop: 黄瓜
+    disease: 枯萎病
+    temp_range: [24, 28]
+    humidity_threshold: 70
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [24, 28], soil_moisture: "high" }
+      medium: { temp: [24, 28] }
+      low: {}
+
+  黄瓜_细菌性角斑病:
+    crop: 黄瓜
+    disease: 细菌性角斑病
+    temp_range: [22, 28]
+    humidity_threshold: 85
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [22, 28], humidity: [85, 100], rain_days: 2 }
+      medium: { temp: [22, 28], humidity: [75, 85] }
+      low: {}
+
+  黄瓜_蔓枯病:
+    crop: 黄瓜
+    disease: 蔓枯病
+    temp_range: [20, 28]
+    humidity_threshold: 85
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [20, 28], humidity: [85, 100], rain_days: 2 }
+      medium: { temp: [20, 28], humidity: [75, 85] }
+      low: {}
+
+  # === 辣椒 ===
+  辣椒_疫病:
+    crop: 辣椒
+    disease: 疫病
+    temp_range: [25, 30]
+    humidity_threshold: 85
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [25, 30], humidity: [85, 100], rain_days: 2 }
+      medium: { temp: [25, 30], humidity: [75, 85] }
+      low: {}
+
+  辣椒_炭疽病:
+    crop: 辣椒
+    disease: 炭疽病
+    temp_range: [22, 28]
+    humidity_threshold: 80
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [22, 28], humidity: [80, 100], rain_days: 2 }
+      medium: { temp: [22, 28], humidity: [70, 80] }
+      low: {}
+
+  辣椒_灰霉病:
+    crop: 辣椒
+    disease: 灰霉病
+    temp_range: [15, 25]
+    humidity_threshold: 90
+    rain_days_trigger: 2
+    risk_factors:
+      high: { temp: [15, 25], humidity: [90, 100], rain_days: 2 }
+      medium: { temp: [15, 25], humidity: [80, 90] }
+      low: {}
+
+  辣椒_病毒病:
+    crop: 辣椒
+    disease: 病毒病
+    temp_range: [25, 35]
+    humidity_threshold: 40
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [30, 40], humidity: [0, 40] }
+      medium: { temp: [25, 30], humidity: [40, 60] }
+      low: {}
+
+  辣椒_软腐病:
+    crop: 辣椒
+    disease: 软腐病
+    temp_range: [25, 35]
+    humidity_threshold: 80
+    rain_days_trigger: 1
+    risk_factors:
+      high: { temp: [25, 35], humidity: [80, 100], rain_days: 1 }
+      medium: { temp: [25, 35], humidity: [70, 80] }
+      low: {}
+
+  辣椒_脐腐病:
+    crop: 辣椒
+    disease: 脐腐病
+    temp_range: [30, 40]
+    humidity_threshold: 50
+    rain_days_trigger: 0
+    risk_factors:
+      high: { temp: [35, 45], humidity: [0, 50] }
+      medium: { temp: [30, 35], humidity: [0, 60] }
+      low: {}

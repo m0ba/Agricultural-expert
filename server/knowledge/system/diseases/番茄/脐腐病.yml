@@ -1,0 +1,55 @@
+# 脐腐病
+name: 脐腐病
+alias: 顶腐病
+pathogen_type: 生理性
+pathogen_name: 缺钙引起
+crops: [番茄, 辣椒]
+
+symptoms:
+  fruit: 果实脐部出现水渍状暗绿色斑，后变黑褐色凹陷，组织干缩
+  leaf: 无明显叶片症状
+
+conditions:
+  temperature: "高温干旱时多发"
+  humidity: "干燥"
+  season: 盛果期
+  triggers: [高温干旱, 钙供应不足, 施氮过多, 水分不均匀]
+
+agricultural_control:
+  - 均衡供水避免忽干忽湿
+  - 补充钙肥（叶面喷施氯化钙）
+  - 避免偏施氮肥
+  - 覆盖地膜保墒
+  - 适当疏果减少负担
+  - 避免过度摘叶
+
+chemical_control:
+  - name: 氯化钙
+    dilution: 300倍
+    interval: 7天
+    method: 叶面喷施
+  - name: 糖醇钙
+    dilution: 1000倍
+    interval: 7天
+    method: 叶面喷施
+  - name: 硝酸钙
+    dilution: 500倍
+    interval: 10天
+    method: 随水冲施
+  - name: 螯合钙
+    dilution: 1500倍
+    interval: 7天
+    method: 叶面喷施
+
+biological_control:
+  - 海藻钙
+  - 氨基酸钙
+
+risk_model:
+  temp_range: [30, 40]
+  humidity_threshold: 50
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "温度>35°C + 湿度<50% + 持续干旱"
+    medium: "温度>30°C + 湿度<60%"
+    low: "其他情况"

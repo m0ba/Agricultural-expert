@@ -1,0 +1,31 @@
+# 霜霉病
+name: 霜霉病
+alias: 白霉病
+pathogen_type: 真菌
+pathogen_name: Peronospora parasitica
+crops: [大白菜]
+
+symptoms:
+  leaf: 叶片出现黄绿色病斑，叶背生白色霉层
+
+conditions:
+  temperature: "15-20°C"
+  humidity: "相对湿度>85%"
+  season: 春秋季高发
+  triggers: [叶面结露, 通风不良, 昼夜温差大]
+
+agricultural_control:
+  - 选用抗病品种
+  - 合理密植，改善通风
+  - 控制棚内湿度
+  - 及时摘除病叶
+
+chemical_control:
+  - name: 甲霜灵锰锌
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+  - name: 霜脲氰
+    dilution: 700倍
+    interval: 7天
+    method: 喷雾

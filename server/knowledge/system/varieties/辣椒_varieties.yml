@@ -1,0 +1,45 @@
+# 辣椒品种库
+crop: 辣椒
+varieties:
+  - name: 螺丝椒
+    type: 螺丝椒
+    origin: 国产品种
+    traits: 中早熟，果实弯曲似螺丝，肉厚，微辣
+    suitable_for: 设施大棚
+    disease_resistance: 抗病毒病、疫病
+
+  - name: 薄皮椒
+    type: 薄皮椒
+    origin: 国产品种
+    traits: 早熟，果皮薄，口感脆，中等辣度
+    suitable_for: 设施大棚/露地
+    disease_resistance: 中抗病毒病
+
+  - name: 线椒
+    type: 线椒
+    origin: 国产品种
+    traits: 中晚熟，果实细长，辣度高，干鲜两用
+    suitable_for: 设施大棚/露地
+    disease_resistance: 抗病毒病
+
+  - name: 甜椒（灯笼椒）
+    type: 甜椒
+    origin: 国产品种
+    traits: 中熟，果实方形，肉厚，不辣
+    suitable_for: 设施大棚
+    disease_resistance: 抗TMV
+
+  - name: 羊角椒
+    type: 羊角椒
+    origin: 国产品种
+    traits: 中熟，果实羊角形，辣度适中
+    suitable_for: 设施大棚
+    disease_resistance: 中抗疫病
+
+  - name: 彩色甜椒
+    type: 甜椒
+    origin: 进口品种
+    traits: 果实转色后红/黄/橙色，肉厚，口感甜
+    suitable_for: 设施大棚
+    disease_resistance: 抗TMV
+

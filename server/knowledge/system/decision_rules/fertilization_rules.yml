@@ -1,0 +1,69 @@
+# 施肥决策规则
+rules:
+  - rule_id: fertilization_transplant_recovery
+    trigger:
+      crop_stage: [定植缓苗期]
+      days_after_transplant: { min: 7 }
+    action:
+      type: 施肥
+      priority: 重要
+      advice: "定植后7天，冲施生根剂促进根系发育"
+      conditions:
+        - "生根剂按说明书稀释"
+        - "随水滴灌"
+      warnings:
+        - "不可浓度过高"
+
+  - rule_id: fertilization_flowering
+    trigger:
+      crop_stage: [初花期]
+    action:
+      type: 施肥
+      priority: 重要
+      advice: "初花期追施高磷复合肥促进花芽分化"
+      conditions:
+        - "高磷型复合肥15-20kg/亩"
+        - "叶面喷施磷酸二氢钾"
+      warnings:
+        - "避免偏施氮肥导致徒长"
+
+  - rule_id: fertilization_fruiting
+    trigger:
+      crop_stage: [盛果期]
+    action:
+      type: 施肥
+      priority: 高
+      advice: "盛果期需加强营养供应"
+      conditions:
+        - "高钾复合肥20-25kg/亩"
+        - "配合钙镁肥叶面喷施"
+        - "水肥一体化随水施入"
+      warnings:
+        - "每穗果膨大期均需追肥"
+
+  - rule_id: fertilization_calcium_deficiency_risk
+    trigger:
+      crop_stage: [盛果期]
+      weather:
+        temperature_max: { min: 30 }
+    action:
+      type: 施肥
+      priority: 重要
+      advice: "高温期注意补钙，预防脐腐病"
+      conditions:
+        - "叶面喷施氯化钙300倍液"
+        - "7天一次"
+      warnings:
+        - "脐腐病预防胜于治疗"
+
+  - rule_id: fertilization_harvest
+    trigger:
+      crop_stage: [采收期]
+    action:
+      type: 施肥
+      priority: 常规
+      advice: "采收期每采收2-3次追肥一次"
+      conditions:
+        - "平衡型复合肥10-15kg/亩"
+      warnings:
+        - "后期适当减少施肥量"

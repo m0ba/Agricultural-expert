@@ -1,0 +1,37 @@
+# 葫芦科 - 科属共性知识
+family: 葫芦科
+latin_name: Cucurbitaceae
+
+common_traits:
+  temperature: 喜温，适宜温度白天25-30°C，夜间15-18°C
+  humidity: 适宜相对湿度70-80%
+  light: 喜光，但也耐弱光
+  soil: 喜肥沃疏松土壤，pH 6.0-7.0
+  water: 需水量大，尤其膨瓜期
+
+common_diseases:
+  - 霜霉病
+  - 白粉病
+  - 枯萎病
+  - 炭疽病
+  - 蔓枯病
+
+common_pests:
+  - 蚜虫
+  - 白粉虱
+  - 瓜绢螟
+  - 斑潜蝇
+
+management_points:
+  - 蔓生品种需搭架引蔓
+  - 适时打顶摘心促坐果
+  - 膨瓜期加强水肥供应
+  - 注意预防霜霉和白粉
+
+crops:
+  - 黄瓜
+  - 南瓜
+  - 西葫芦
+  - 苦瓜
+  - 甜瓜
+  - 西瓜

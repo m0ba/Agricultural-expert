@@ -1,0 +1,57 @@
+# 枯萎病
+name: 枯萎病
+alias: 萎蔫病
+pathogen_type: 真菌
+pathogen_name: Fusarium oxysporum f. sp. cucumerinum
+crops: [黄瓜]
+
+symptoms:
+  root: 根部维管束变褐
+  stem: 茎基部维管束变褐，纵剖可见
+  leaf: 中下部叶片中午萎蔫，早晚恢复，逐渐全株枯死
+  plant: 多在开花结瓜期发病
+
+conditions:
+  temperature: "24-28°C"
+  humidity: "土壤湿度偏高"
+  season: 开花结瓜期
+  triggers: [连作, 土壤偏酸, 根部伤口, 线虫危害]
+
+agricultural_control:
+  - 与非葫芦科作物轮作3年以上
+  - 使用嫁接苗
+  - 增施有机肥改良土壤
+  - 土壤消毒
+  - 高畦种植
+  - 及时拔除病株
+
+chemical_control:
+  - name: 恶霉灵
+    dilution: 800倍
+    interval: 10天
+    method: 灌根
+  - name: 甲基硫菌灵
+    dilution: 500倍
+    interval: 10天
+    method: 灌根
+  - name: 咯菌腈
+    dilution: 1500倍
+    interval: 10天
+    method: 灌根
+  - name: 多菌灵
+    dilution: 500倍
+    interval: 10天
+    method: 灌根
+
+biological_control:
+  - 木霉菌
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [24, 28]
+  humidity_threshold: 70
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "地温24-28°C + 连作地块 + 土壤湿度高"
+    medium: "地温24-28°C + 非轮作地块"
+    low: "其他情况"

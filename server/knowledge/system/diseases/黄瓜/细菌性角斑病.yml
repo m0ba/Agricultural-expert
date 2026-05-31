@@ -1,0 +1,56 @@
+# 细菌性角斑病
+name: 细菌性角斑病
+alias: 
+pathogen_type: 细菌
+pathogen_name: Pseudomonas syringae pv. lachrymans
+crops: [黄瓜]
+
+symptoms:
+  leaf: 叶片出现多角形水渍状病斑，后期变灰白色穿孔
+  fruit: 果实出现水渍状病斑，有白色菌脓
+  stem: 茎部水渍状条斑
+
+conditions:
+  temperature: "22-28°C"
+  humidity: "相对湿度>85%"
+  season: 春秋季
+  triggers: [叶面结露, 降雨, 通风不良]
+
+agricultural_control:
+  - 无病种子
+  - 温汤浸种
+  - 通风排湿
+  - 及时摘除病叶
+  - 滴灌替代喷灌
+  - 轮作
+
+chemical_control:
+  - name: 春雷霉素
+    dilution: 500倍
+    interval: 7天
+    method: 喷雾
+  - name: 中生菌素
+    dilution: 800倍
+    interval: 7天
+    method: 喷雾
+  - name: 噻唑锌
+    dilution: 1000倍
+    interval: 7天
+    method: 喷雾
+  - name: 氢氧化铜
+    dilution: 600倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 春雷霉素
+  - 中生菌素
+
+risk_model:
+  temp_range: [22, 28]
+  humidity_threshold: 85
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度22-28°C + 湿度>85% + 连续阴雨"
+    medium: "温度22-28°C + 湿度>75%"
+    low: "其他情况"

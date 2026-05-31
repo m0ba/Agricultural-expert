@@ -1,0 +1,38 @@
+# 黄瓜品种库
+crop: 黄瓜
+varieties:
+  - name: 德瑞特79
+    type: 华北型密刺黄瓜
+    origin: 国产品种
+    traits: 早熟，主蔓结瓜，瓜条顺直，长30-35cm
+    suitable_for: 设施大棚
+    disease_resistance: 抗霜霉病、白粉病、枯萎病
+
+  - name: 中农26
+    type: 华北型黄瓜
+    origin: 国产品种
+    traits: 早熟，耐低温弱光，瓜色深绿，长28-32cm
+    suitable_for: 日光温室
+    disease_resistance: 抗霜霉病、白粉病
+
+  - name: 津优35
+    type: 华北型黄瓜
+    origin: 国产品种
+    traits: 中早熟，连续坐瓜能力强，瓜条亮绿
+    suitable_for: 设施大棚
+    disease_resistance: 抗枯萎病、霜霉病
+
+  - name: 博特6号
+    type: 水果黄瓜
+    origin: 国产品种
+    traits: 无刺，皮薄，口感脆甜，长15-18cm
+    suitable_for: 设施大棚
+    disease_resistance: 抗白粉病
+
+  - name: 荷兰小黄瓜
+    type: 水果黄瓜
+    origin: 进口品种
+    traits: 无刺，短粗型，口感好，长12-15cm
+    suitable_for: 设施大棚
+    disease_resistance: 抗多种病害
+

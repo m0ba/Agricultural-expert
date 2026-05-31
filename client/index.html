@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2d7d46" />
+  <meta name="app-version" content="1780150200" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>农事专家</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    // Force refresh when version changes (clears stale service worker cache)
+    var APP_VERSION = '1780150200';
+    var saved = localStorage.getItem('app_version');
+    if (saved && saved !== APP_VERSION) {
+      localStorage.setItem('app_version', APP_VERSION);
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(regs) {
+          regs.forEach(function(r) { r.unregister(); });
+          location.reload(true);
+        });
+      }
+    } else {
+      localStorage.setItem('app_version', APP_VERSION);
+    }
+  </script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

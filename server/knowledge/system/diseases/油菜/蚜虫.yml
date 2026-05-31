@@ -1,0 +1,27 @@
+# 蚜虫
+name: 蚜虫
+alias: 腻虫
+pathogen_type: 虫害
+pathogen_name: Aphididae
+crops: [油菜]
+
+symptoms:
+  leaf: 叶片卷曲变形，有蜜露分泌物
+
+conditions:
+  temperature: "18-25°C"
+  humidity: "干燥环境易发"
+  season: 全生育期均可发生
+  triggers: [干旱, 通风不良, 氮肥过多]
+
+agricultural_control:
+  - 悬挂黄色粘虫板
+  - 保护天敌（瓢虫、草蛉）
+  - 及时清除杂草
+  - 合理施肥避免徒长
+
+chemical_control:
+  - name: 吡虫啉
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾

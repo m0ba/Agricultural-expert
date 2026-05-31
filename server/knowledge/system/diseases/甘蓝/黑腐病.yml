@@ -1,0 +1,28 @@
+# 黑腐病
+name: 黑腐病
+alias: 黑心病
+pathogen_type: 细菌
+pathogen_name: Xanthomonas campestris
+crops: [甘蓝]
+
+symptoms:
+  leaf: 叶脉变黑，叶缘出现V形黄斑
+  head: 叶球内部维管束变黑
+
+conditions:
+  temperature: "25-30°C"
+  humidity: "高温高湿易发"
+  season: 全生育期可发生
+  triggers: [种子带菌, 机械伤口, 雨水传播]
+
+agricultural_control:
+  - 使用无病种子
+  - 温汤浸种处理
+  - 轮作2-3年
+  - 减少机械损伤
+
+chemical_control:
+  - name: 农用链霉素
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾

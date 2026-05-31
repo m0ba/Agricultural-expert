@@ -1,0 +1,691 @@
+# 农药安全数据库
+pesticides:
+  - name: 代森锰锌
+    type: 杀菌剂
+    active_ingredient: 代森锰锌
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 茄子]
+    control_targets: [早疫病, 炭疽病, 霜霉病]
+    dilution: 800倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天, 大风]
+      temperature: { max: 35 }
+      stage: []
+      notes: 高温天气减量使用
+
+  - name: 百菌清
+    type: 杀菌剂
+    active_ingredient: 四氯间苯二甲腈
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [早疫病, 晚疫病, 霜霉病]
+    dilution: 600倍
+    dosage: 60g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 对桃、梅敏感
+
+  - name: 甲霜灵锰锌
+    type: 杀菌剂
+    active_ingredient: 甲霜灵+代森锰锌
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [晚疫病, 霜霉病, 疫病]
+    dilution: 600倍
+    dosage: 60g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天, 大风]
+      temperature: { max: 35 }
+      stage: []
+      notes: 不宜与碱性农药混用
+
+  - name: 异菌脲
+    type: 杀菌剂
+    active_ingredient: 异菌脲
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒, 草莓]
+    control_targets: [灰霉病, 早疫病]
+    dilution: 1000倍
+    dosage: 30g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 30 }
+      stage: []
+      notes: 每季最多使用3次
+
+  - name: 腐霉利
+    type: 杀菌剂
+    active_ingredient: 腐霉利
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 草莓]
+    control_targets: [灰霉病]
+    dilution: 1000倍
+    dosage: 25g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 30 }
+      stage: []
+      notes: 与异菌脲交替使用
+
+  - name: 吡虫啉
+    type: 杀虫剂
+    active_ingredient: 吡虫啉
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [蚜虫, 白粉虱]
+    dilution: 2000倍
+    dosage: 10g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: [花期]
+      notes: 花期慎用，对蜜蜂有毒
+
+  - name: 啶虫脒
+    type: 杀虫剂
+    active_ingredient: 啶虫脒
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [蚜虫, 白粉虱]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: [花期]
+      notes: 花期慎用
+
+  - name: 螺虫乙酯
+    type: 杀虫剂
+    active_ingredient: 螺虫乙酯
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [蚜虫, 白粉虱, 蓟马]
+    dilution: 3000倍
+    dosage: 10ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天, 大风]
+      temperature: { max: 35 }
+      stage: []
+      notes: 内吸传导型，持效期长
+
+  - name: 嘧霉胺
+    type: 杀菌剂
+    active_ingredient: 嘧霉胺
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [灰霉病]
+    dilution: 800倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 30 }
+      stage: []
+      notes: 每季不超过3次
+
+  - name: 苯醚甲环唑
+    type: 杀菌剂
+    active_ingredient: 苯醚甲环唑
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [叶霉病, 白粉病, 炭疽病]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天, 大风]
+      temperature: { max: 35 }
+      stage: []
+      notes: 三唑类，注意用量
+
+  - name: 吡唑醚菌酯
+    type: 杀菌剂
+    active_ingredient: 吡唑醚菌酯
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [早疫病, 炭疽病, 白粉病]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 甲氧基丙烯酸酯类
+
+  - name: 霜脲氰
+    type: 杀菌剂
+    active_ingredient: 霜脲氰
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [晚疫病, 霜霉病, 疫病]
+    dilution: 700倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 常与代森锰锌复配
+
+  - name: 春雷霉素
+    type: 杀菌剂
+    active_ingredient: 春雷霉素
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [细菌性角斑病, 软腐病]
+    dilution: 500倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 生物源杀菌剂
+
+  - name: 恶霉灵
+    type: 杀菌剂
+    active_ingredient: 恶霉灵
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝]
+    control_targets: [枯萎病, 根腐病, 猝倒病]
+    dilution: 800倍
+    dosage: 20ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 土壤处理效果好
+
+  - name: 甲基硫菌灵
+    type: 杀菌剂
+    active_ingredient: 甲基硫菌灵
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [叶霉病, 枯萎病, 蔓枯病]
+    dilution: 800倍
+    dosage: 40g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 广谱内吸性杀菌剂
+
+  - name: 咯菌腈
+    type: 杀菌剂
+    active_ingredient: 咯菌腈
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [灰霉病, 根腐病]
+    dilution: 1000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 非内吸性，保护为主
+
+  - name: 多菌灵
+    type: 杀菌剂
+    active_ingredient: 苯并咪唑-2-基氨基甲酸甲酯
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝]
+    control_targets: [枯萎病, 根腐病, 炭疽病]
+    dilution: 500倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 广谱内吸性杀菌剂
+
+  - name: 咪鲜胺
+    type: 杀菌剂
+    active_ingredient: 咪鲜胺
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [炭疽病, 蔓枯病]
+    dilution: 1500倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 注意安全间隔期
+
+  - name: 烯酰吗啉
+    type: 杀菌剂
+    active_ingredient: 烯酰吗啉
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [霜霉病, 晚疫病, 疫病]
+    dilution: 1500倍
+    dosage: 20ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 专性杀菌剂
+
+  - name: 氟啶胺
+    type: 杀菌剂
+    active_ingredient: 氟啶胺
+    safety_interval_days: 10
+    applicable_crops: [番茄, 辣椒]
+    control_targets: [晚疫病, 疫病]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 30 }
+      stage: []
+      notes: 高温慎用
+
+  - name: 氟硅唑
+    type: 杀菌剂
+    active_ingredient: 氟硅唑
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [叶霉病, 白粉病]
+    dilution: 3000倍
+    dosage: 10ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 三唑类，注意用量
+
+  - name: 嘧菌酯
+    type: 杀菌剂
+    active_ingredient: 嘧菌酯
+    safety_interval_days: 10
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [叶霉病, 早疫病, 白粉病]
+    dilution: 1500倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 甲氧基丙烯酸酯类
+
+  - name: 三唑酮
+    type: 杀菌剂
+    active_ingredient: 三唑酮
+    safety_interval_days: 7
+    applicable_crops: [黄瓜, 辣椒]
+    control_targets: [白粉病, 锈病]
+    dilution: 1500倍
+    dosage: 20g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 三唑类，抑制生长
+
+  - name: 醚菌酯
+    type: 杀菌剂
+    active_ingredient: 醚菌酯
+    safety_interval_days: 7
+    applicable_crops: [黄瓜, 辣椒]
+    control_targets: [白粉病, 霜霉病]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 甲氧基丙烯酸酯类
+
+  - name: 氟吡菌胺
+    type: 杀菌剂
+    active_ingredient: 氟吡菌胺
+    safety_interval_days: 7
+    applicable_crops: [黄瓜]
+    control_targets: [霜霉病]
+    dilution: 1000倍
+    dosage: 20ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 专性杀菌剂
+
+  - name: 戊唑醇
+    type: 杀菌剂
+    active_ingredient: 戊唑醇
+    safety_interval_days: 10
+    applicable_crops: [黄瓜, 辣椒]
+    control_targets: [蔓枯病, 白粉病]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 三唑类，注意用量
+
+  - name: 甲霜灵
+    type: 杀菌剂
+    active_ingredient: 甲霜灵
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [根腐病, 猝倒病]
+    dilution: 800倍
+    dosage: 30g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 易产生抗药性
+
+  - name: 氟啶虫酰胺
+    type: 杀虫剂
+    active_ingredient: 氟啶虫酰胺
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝, 生菜, 油菜]
+    control_targets: [蚜虫]
+    dilution: 2000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 新型杀虫剂，持效期长
+
+  - name: 氯虫苯甲酰胺
+    type: 杀虫剂
+    active_ingredient: 氯虫苯甲酰胺
+    safety_interval_days: 7
+    applicable_crops: [番茄, 辣椒, 大白菜, 甘蓝, 生菜, 油菜]
+    control_targets: [菜青虫, 小菜蛾, 夜蛾]
+    dilution: 3000倍
+    dosage: 10ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 高效低毒，对鳞翅目特效
+
+  - name: 中生菌素
+    type: 细菌性杀菌剂
+    active_ingredient: 中生菌素
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝]
+    control_targets: [软腐病, 细菌性角斑病, 黑腐病]
+    dilution: 1000倍
+    dosage: 20g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 生物源杀菌剂
+
+  - name: 噻唑锌
+    type: 细菌性杀菌剂
+    active_ingredient: 噻唑锌
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝]
+    control_targets: [软腐病, 细菌性角斑病, 黑腐病]
+    dilution: 500倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 有机锌杀菌剂
+
+  - name: 氢氧化铜
+    type: 细菌性杀菌剂
+    active_ingredient: 氢氧化铜
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒]
+    control_targets: [软腐病, 细菌性角斑病]
+    dilution: 500倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天, 大风]
+      temperature: { max: 30 }
+      stage: []
+      notes: 铜制剂，注意药害
+
+  - name: 噻菌铜
+    type: 细菌性杀菌剂
+    active_ingredient: 噻菌铜
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝]
+    control_targets: [软腐病, 细菌性角斑病, 黑腐病]
+    dilution: 500倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 有机铜杀菌剂
+
+  - name: 农用链霉素
+    type: 细菌性杀菌剂
+    active_ingredient: 链霉素
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 大白菜, 甘蓝, 生菜, 油菜]
+    control_targets: [软腐病, 细菌性角斑病, 黑腐病]
+    dilution: 2000倍
+    dosage: 10g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 抗生素类杀菌剂
+
+  - name: 苏云金杆菌
+    type: 生物农药
+    active_ingredient: Bt晶体蛋白
+    safety_interval_days: 3
+    applicable_crops: [大白菜, 甘蓝, 生菜, 油菜, 番茄, 辣椒]
+    control_targets: [菜青虫, 小菜蛾, 夜蛾]
+    dilution: 500倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: Bt生物杀虫剂，安全环保
+
+  - name: 宁南霉素
+    type: 生物农药
+    active_ingredient: 宁南霉素
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒]
+    control_targets: [病毒病]
+    dilution: 500倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 生物源抗病毒剂
+
+  - name: 氨基寡糖素
+    type: 生物农药
+    active_ingredient: 氨基寡糖素
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [病毒病]
+    dilution: 800倍
+    dosage: 25ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 植物诱抗剂，增强抗病力
+
+  - name: 盐酸吗啉胍
+    type: 抗病毒剂
+    active_ingredient: 盐酸吗啉胍
+    safety_interval_days: 7
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [病毒病]
+    dilution: 500倍
+    dosage: 40g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 广谱抗病毒剂
+
+  - name: 菌毒清
+    type: 抗病毒剂
+    active_ingredient: 三十烷醇+十二烷基硫酸钠
+    safety_interval_days: 7
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [病毒病]
+    dilution: 500倍
+    dosage: 40ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 抗病毒杀菌剂
+
+  - name: 氯化钙
+    type: 叶面肥
+    active_ingredient: 氯化钙
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [脐腐病]
+    dilution: 300倍
+    dosage: 50g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 补钙防脐腐
+
+  - name: 糖醇钙
+    type: 叶面肥
+    active_ingredient: 糖醇螯合钙
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [脐腐病]
+    dilution: 1000倍
+    dosage: 20ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 吸收率高，安全
+
+  - name: 硝酸钙
+    type: 叶面肥
+    active_ingredient: 硝酸钙
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [脐腐病]
+    dilution: 500倍
+    dosage: 40g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 速效补钙
+
+  - name: 螯合钙
+    type: 叶面肥
+    active_ingredient: EDTA螯合钙
+    safety_interval_days: 3
+    applicable_crops: [番茄, 辣椒, 黄瓜]
+    control_targets: [脐腐病]
+    dilution: 1500倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 高效吸收，不易固定
+
+  - name: 噻虫嗪
+    type: 杀虫剂
+    active_ingredient: 噻虫嗪
+    safety_interval_days: 5
+    applicable_crops: [番茄, 黄瓜, 辣椒, 茄子]
+    control_targets: [蚜虫, 白粉虱, 蓟马]
+    dilution: 5000倍
+    dosage: 10g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: [花期]
+      notes: 烟碱类，对蜜蜂高毒，开花期慎用
+
+  - name: 吡丙醚
+    type: 杀虫剂
+    active_ingredient: 吡丙醚
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 茄子]
+    control_targets: [白粉虱]
+    dilution: 1000倍
+    dosage: 15ml/亩
+    dosage_unit: ml/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 昆虫生长调节剂，专杀若虫和卵，对成虫无效
+
+  - name: 呋虫胺
+    type: 杀虫剂
+    active_ingredient: 呋虫胺
+    safety_interval_days: 7
+    applicable_crops: [番茄, 黄瓜, 辣椒, 茄子]
+    control_targets: [蚜虫, 白粉虱, 蓟马]
+    dilution: 1000倍
+    dosage: 15g/亩
+    dosage_unit: g/亩
+    contraindications:
+      weather: [雨天]
+      temperature: { max: 35 }
+      stage: []
+      notes: 第三代烟碱类，对抗性种群有效，内吸性好

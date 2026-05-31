@@ -1,0 +1,56 @@
+# 疫病
+name: 疫病
+pathogen_type: 真菌
+pathogen_name: Phytophthora capsici
+crops: [辣椒]
+
+symptoms:
+  stem: 茎基部出现暗绿色水渍状病斑，后变黑褐色缢缩
+  leaf: 叶片出现暗绿色水渍状大斑
+  fruit: 果实出现暗绿色水渍状斑，后变褐软腐
+  root: 根颈部腐烂
+
+conditions:
+  temperature: "25-30°C"
+  humidity: "相对湿度>85%"
+  season: 高温多雨季节
+  triggers: [暴雨后骤晴, 积水, 连作]
+
+agricultural_control:
+  - 高畦种植防积水
+  - 覆盖地膜减少雨水溅起
+  - 与非茄科作物轮作
+  - 及时排水
+  - 通风降湿
+  - 选用抗病品种
+
+chemical_control:
+  - name: 甲霜灵锰锌
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+  - name: 烯酰吗啉
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+  - name: 霜脲氰
+    dilution: 700倍
+    interval: 7天
+    method: 喷雾
+  - name: 氟啶胺
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 木霉菌
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [25, 30]
+  humidity_threshold: 85
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度25-30°C + 湿度>85% + 连续降雨"
+    medium: "温度25-30°C + 湿度>75%"
+    low: "其他情况"

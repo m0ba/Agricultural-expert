@@ -1,0 +1,31 @@
+# 菜青虫
+name: 菜青虫
+alias: 菜粉蝶幼虫
+pathogen_type: 虫害
+pathogen_name: Pieris rapae
+crops: [甘蓝]
+
+symptoms:
+  leaf: 叶片被咬成孔洞或缺刻，有虫粪
+
+conditions:
+  temperature: "20-25°C"
+  humidity: "适温干燥"
+  season: 春秋季高发
+  triggers: [成虫产卵, 通风不良]
+
+agricultural_control:
+  - 人工捕捉幼虫
+  - 悬挂防虫网
+  - 保护天敌（寄生蜂）
+  - 及时清除残株
+
+chemical_control:
+  - name: 苏云金杆菌
+    dilution: 500倍
+    interval: 5天
+    method: 喷雾
+  - name: 氯虫苯甲酰胺
+    dilution: 3000倍
+    interval: 7天
+    method: 喷雾

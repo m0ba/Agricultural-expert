@@ -1,0 +1,56 @@
+# 蔓枯病
+name: 蔓枯病
+alias: 
+pathogen_type: 真菌
+pathogen_name: Didymella bryoniae
+crops: [黄瓜]
+
+symptoms:
+  stem: 茎节部出现椭圆形灰白色病斑，有琥珀色树脂胶
+  leaf: 叶片出现V形或圆形大斑
+  fruit: 果实出现水渍状病斑
+
+conditions:
+  temperature: "20-28°C"
+  humidity: "相对湿度>85%"
+  season: 全生育期
+  triggers: [伤口, 高湿, 通风不良]
+
+agricultural_control:
+  - 避免机械损伤
+  - 通风降湿
+  - 及时拔除病株
+  - 覆盖地膜
+  - 高畦种植
+  - 轮作
+
+chemical_control:
+  - name: 甲基硫菌灵
+    dilution: 500倍
+    interval: 7天
+    method: 涂抹/喷雾
+  - name: 苯醚甲环唑
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+  - name: 咪鲜胺
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+  - name: 戊唑醇
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 木霉菌
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [20, 28]
+  humidity_threshold: 85
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度20-28°C + 湿度>85% + 植株有伤口"
+    medium: "温度20-28°C + 湿度>75%"
+    low: "其他情况"

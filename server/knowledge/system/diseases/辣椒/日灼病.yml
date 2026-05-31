@@ -1,0 +1,55 @@
+# 日灼病
+name: 日灼病
+alias: 日烧病
+pathogen_type: 生理性
+pathogen_name: 强光直射灼伤
+crops: [辣椒]
+
+symptoms:
+  fruit: 果实向阳面出现白色或黄褐色斑块，革质化，后腐生杂菌
+  leaf: 叶片边缘枯焦
+
+conditions:
+  temperature: ">35°C"
+  humidity: "干旱"
+  season: 夏季高温强光期
+  triggers: [强光直射, 植株遮荫不足, 高温干旱]
+
+agricultural_control:
+  - 合理密植增加遮荫
+  - 保持适当叶量不过度摘叶
+  - 覆盖遮阳网
+  - 及时灌水降温
+  - 套种高秆作物遮荫
+  - 选择适当栽培时期
+
+chemical_control:
+  - name: 无特效药剂
+    dilution: 以预防为主
+    interval: 
+    method: 
+  - name: 喷施钙肥
+    dilution: 500倍
+    interval: 7天
+    method: 叶面喷施（增强果皮韧性）
+  - name: 
+    dilution: 
+    interval: 
+    method: 
+  - name: 
+    dilution: 
+    interval: 
+    method: 
+
+biological_control:
+  - 海藻提取物
+  - 氨基酸叶面肥
+
+risk_model:
+  temp_range: [35, 45]
+  humidity_threshold: 40
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "温度>35°C + 晴天强光 + 无遮荫"
+    medium: "温度>32°C + 晴天"
+    low: "其他情况"

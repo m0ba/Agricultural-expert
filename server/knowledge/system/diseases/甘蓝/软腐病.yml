@@ -1,0 +1,34 @@
+# 软腐病
+name: 软腐病
+alias: 烂疙瘩
+pathogen_type: 细菌
+pathogen_name: Pectobacterium carotovorum
+crops: [甘蓝]
+
+symptoms:
+  stem: 基部出现水渍状病斑，软腐恶臭
+  leaf: 叶片萎蔫，叶柄基部腐烂
+  head: 叶球内部腐烂，有恶臭味
+
+conditions:
+  temperature: "25-30°C"
+  humidity: "高湿多雨易发"
+  season: 包心期至采收期高发
+  triggers: [田间积水, 机械伤口, 虫害伤口]
+
+agricultural_control:
+  - 高畦栽培，避免田间积水
+  - 减少机械损伤
+  - 及时防治害虫减少伤口
+  - 拔除病株并撒石灰消毒
+  - 轮作2-3年
+
+chemical_control:
+  - name: 农用链霉素
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾
+  - name: 噻菌铜
+    dilution: 500倍
+    interval: 7天
+    method: 喷雾

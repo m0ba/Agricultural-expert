@@ -1,0 +1,56 @@
+# 软腐病
+name: 软腐病
+alias: 
+pathogen_type: 细菌
+pathogen_name: Pectobacterium carotovorum
+crops: [辣椒]
+
+symptoms:
+  fruit: 果实出现水渍状暗绿色斑，迅速软腐，有臭味
+  stem: 茎部水渍状腐烂
+  leaf: 罕见叶部症状
+
+conditions:
+  temperature: "25-35°C"
+  humidity: "高湿"
+  season: 夏秋高温季节
+  triggers: [虫害伤口, 雨水, 高温高湿]
+
+agricultural_control:
+  - 防治害虫减少伤口
+  - 及时采收
+  - 通风降湿
+  - 避免果实积水
+  - 清除病果
+  - 轮作
+
+chemical_control:
+  - name: 春雷霉素
+    dilution: 500倍
+    interval: 7天
+    method: 喷雾
+  - name: 中生菌素
+    dilution: 800倍
+    interval: 7天
+    method: 喷雾
+  - name: 噻唑锌
+    dilution: 1000倍
+    interval: 7天
+    method: 喷雾
+  - name: 氢氧化铜
+    dilution: 600倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 春雷霉素
+  - 中生菌素
+
+risk_model:
+  temp_range: [25, 35]
+  humidity_threshold: 80
+  rain_days_trigger: 1
+  risk_level_map:
+    high: "温度25-35°C + 湿度>80% + 降雨后"
+    medium: "温度25-35°C + 高湿"
+    low: "其他情况"

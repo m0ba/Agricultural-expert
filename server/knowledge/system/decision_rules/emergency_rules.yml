@@ -1,0 +1,93 @@
+# 紧急情况处置规则
+rules:
+  - rule_id: emergency_frost
+    trigger:
+      weather:
+        temperature_min: { max: 2 }
+    action:
+      type: 紧急
+      priority: 紧急
+      advice: "低温冻害预警，立即采取保温措施"
+      conditions:
+        - "紧急关闭所有通风口"
+        - "有加温设备立即开启"
+        - "棚外加盖保温被"
+        - "必要时棚内点蜡烛或酒精增温"
+      warnings:
+        - "温度低于0°C将造成不可逆损害"
+
+  - rule_id: emergency_high_temp
+    trigger:
+      weather:
+        temperature_max: { min: 38 }
+    action:
+      type: 紧急
+      priority: 紧急
+      advice: "极端高温预警，立即全面降温"
+      conditions:
+        - "全部通风口最大开度"
+        - "开启风机+湿帘"
+        - "棚顶喷水降温"
+        - "适当遮阳"
+      warnings:
+        - "温度超过40°C将造成热害"
+
+  - rule_id: emergency_heavy_rain
+    trigger:
+      weather:
+        precipitation_next_24h: { min: 50 }
+    action:
+      type: 紧急
+      priority: 紧急
+      advice: "暴雨预警，做好排涝准备"
+      conditions:
+        - "检查排水沟是否通畅"
+        - "关闭通风口防雨"
+        - "低洼处提前挖排水沟"
+        - "检查棚体结构安全"
+      warnings:
+        - "积水超过2小时将造成根系缺氧"
+
+  - rule_id: emergency_strong_wind
+    trigger:
+      weather:
+        wind_speed_max: { min: 8 }
+    action:
+      type: 紧急
+      priority: 紧急
+      advice: "大风预警，加固棚体和棚膜"
+      conditions:
+        - "关闭通风口减少风阻"
+        - "检查棚膜固定卡扣"
+        - "加固压膜线"
+        - "有卷帘机的预收保温被"
+      warnings:
+        - "棚膜破损将导致温度骤降"
+
+  - rule_id: emergency_pest_outbreak
+    trigger:
+      crop_stage: [盛果期]
+      disease_risk: 高
+    action:
+      type: 紧急
+      priority: 重要
+      advice: "病害高风险，需立即预防性施药"
+      conditions:
+        - "查看病害风险评估结果"
+        - "选择对应药剂"
+        - "注意安全间隔期"
+      warnings:
+        - "大风天和雨天禁止打药"
+
+  - rule_id: emergency_spray_weather
+    trigger:
+      weather:
+        wind_speed_max: { min: 4 }
+    action:
+      type: 紧急
+      priority: 重要
+      advice: "风速过大，不宜打药"
+      conditions:
+        - "等待风速降低后再打药"
+      warnings:
+        - "风速>4级打药效果差且易飘移"

@@ -1,0 +1,56 @@
+# 蚜虫
+name: 蚜虫
+alias: 蜜虫
+pathogen_type: 虫害
+pathogen_name: 桃蚜/棉蚜
+crops: [番茄, 黄瓜, 辣椒]
+
+symptoms:
+  leaf: 叶片卷曲、皱缩，背面群集大量蚜虫
+  stem: 生长点变形
+  plant: 分泌蜜露引发煤污病，传播病毒病
+
+conditions:
+  temperature: "18-25°C"
+  humidity: "干燥环境"
+  season: 春秋季高发
+  triggers: [干旱, 通风口虫源, 温度适宜]
+
+agricultural_control:
+  - 黄板诱杀
+  - 银灰色地膜驱避
+  - 保护天敌（瓢虫、草蛉）
+  - 及时清除杂草
+  - 防虫网隔离
+  - 早期发现及时防治
+
+chemical_control:
+  - name: 吡虫啉
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾
+  - name: 啶虫脒
+    dilution: 2000倍
+    interval: 7天
+    method: 喷雾
+  - name: 螺虫乙酯
+    dilution: 3000倍
+    interval: 10天
+    method: 喷雾
+  - name: 氟啶虫酰胺
+    dilution: 2500倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 除虫菊素
+  - 苦参碱
+
+risk_model:
+  temp_range: [18, 28]
+  humidity_threshold: 50
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "温度18-28°C + 湿度<50% + 田间已见蚜虫"
+    medium: "温度18-28°C + 适宜条件"
+    low: "其他情况"

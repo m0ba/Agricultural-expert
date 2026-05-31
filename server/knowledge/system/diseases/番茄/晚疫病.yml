@@ -1,0 +1,56 @@
+# 晚疫病
+name: 晚疫病
+alias: 疫病
+pathogen_type: 真菌
+pathogen_name: Phytophthora infestans
+crops: [番茄]
+
+symptoms:
+  leaf: 叶片从叶尖或叶缘出现水渍状暗绿色病斑，湿度大时叶背有白色霉层
+  stem: 茎部出现黑褐色条斑
+  fruit: 果实出现油渍状暗绿色病斑，后变棕褐色
+
+conditions:
+  temperature: "15-25°C"
+  humidity: "相对湿度>90%时爆发"
+  season: 低温高湿季节
+  triggers: [持续阴雨, 夜间结露, 通风不良]
+
+agricultural_control:
+  - 控制棚内湿度
+  - 通风排湿
+  - 避免大水漫灌
+  - 及时摘除病叶
+  - 选抗病品种
+  - 与非茄科作物轮作
+
+chemical_control:
+  - name: 甲霜灵锰锌
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+  - name: 霜脲氰
+    dilution: 700倍
+    interval: 7天
+    method: 喷雾
+  - name: 烯酰吗啉
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+  - name: 氟吡菌胺
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 木霉菌
+  - 多抗霉素
+
+risk_model:
+  temp_range: [15, 25]
+  humidity_threshold: 90
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度15-25°C + 湿度>90% + 连续2天以上阴雨"
+    medium: "温度15-25°C + 湿度>80%"
+    low: "其他情况"

@@ -1,0 +1,57 @@
+# 根腐病
+name: 根腐病
+alias: 
+pathogen_type: 真菌
+pathogen_name: Fusarium spp.
+crops: [番茄, 辣椒]
+
+symptoms:
+  root: 根部腐烂变褐，皮层易剥离
+  stem: 茎基部缢缩变褐
+  leaf: 地上部萎蔫，中午明显，早晚恢复
+  plant: 生长缓慢，逐渐枯死
+
+conditions:
+  temperature: "20-28°C"
+  humidity: "土壤湿度过高"
+  season: 全生育期
+  triggers: [连作, 积水, 土壤板结, 地温过低]
+
+agricultural_control:
+  - 轮作（3年以上）
+  - 高畦种植避免积水
+  - 使用嫁接苗
+  - 增施有机肥改良土壤
+  - 控制灌水量
+  - 定植前土壤消毒
+
+chemical_control:
+  - name: 恶霉灵
+    dilution: 800倍
+    interval: 10天
+    method: 灌根
+  - name: 甲霜灵
+    dilution: 600倍
+    interval: 10天
+    method: 灌根
+  - name: 咯菌腈
+    dilution: 1500倍
+    interval: 10天
+    method: 灌根
+  - name: 多菌灵
+    dilution: 500倍
+    interval: 10天
+    method: 灌根
+
+biological_control:
+  - 木霉菌
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [20, 28]
+  humidity_threshold: 80
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "土壤湿度高 + 地温20-28°C + 连作地块"
+    medium: "土壤湿度偏高"
+    low: "其他情况"

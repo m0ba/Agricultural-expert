@@ -1,0 +1,45 @@
+# 番茄品种库
+crop: 番茄
+varieties:
+  - name: 粉贝贝
+    type: 粉果番茄
+    origin: 国产品种
+    traits: 早熟，耐低温弱光，果实粉红色，单果重150-200g
+    suitable_for: 设施大棚
+    disease_resistance: 中抗叶霉病、TMV
+
+  - name: 大红番茄
+    type: 红果番茄
+    origin: 国产品种
+    traits: 中熟，果实大红色，硬度好耐运输，单果重200-300g
+    suitable_for: 设施大棚/露地
+    disease_resistance: 抗TMV、中抗叶霉病
+
+  - name: 千禧
+    type: 樱桃番茄
+    origin: 国产品种
+    traits: 无限生长型，果实粉红色，口感好，单果重20-25g
+    suitable_for: 设施大棚
+    disease_resistance: 抗TMV
+
+  - name: 釜山88
+    type: 樱桃番茄
+    origin: 进口品种
+    traits: 早熟，果实红色，甜度高，单果重15-20g
+    suitable_for: 设施大棚
+    disease_resistance: 抗TYLCV、抗TMV
+
+  - name: 金棚1号
+    type: 粉果番茄
+    origin: 国产品种
+    traits: 中早熟，耐热性好，果实粉红色，单果重200-250g
+    suitable_for: 设施大棚
+    disease_resistance: 高抗叶霉病、抗TMV
+
+  - name: 硬粉8号
+    type: 粉果番茄
+    origin: 国产品种
+    traits: 中熟，果硬耐运输，粉红色，单果重220-280g
+    suitable_for: 设施大棚
+    disease_resistance: 抗TMV
+

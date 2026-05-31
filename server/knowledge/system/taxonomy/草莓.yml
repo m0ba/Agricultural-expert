@@ -1,0 +1,33 @@
+# 草莓 - 共性知识
+category: 草莓
+latin_name: Fragaria × ananassa
+
+common_traits:
+  temperature: 喜冷凉，适宜温度白天20-25°C，夜间5-8°C（花芽分化需低温）
+  humidity: 适宜相对湿度60-70%
+  light: 喜光，冬季需补光
+  soil: 喜微酸性土壤，pH 5.5-6.5
+  water: 滴灌保持土壤湿润，忌积水
+
+common_diseases:
+  - 灰霉病
+  - 白粉病
+  - 炭疽病
+  - 根腐病
+  - 黄萎病
+
+common_pests:
+  - 红蜘蛛
+  - 蚜虫
+  - 蓟马
+  - 斜纹夜蛾
+
+management_points:
+  - 匍匐茎管理及时摘除
+  - 灰霉病和白粉病高发需重点防控
+  - 需蜜蜂授粉（设施内放蜂）
+  - 适时疏花疏果保证品质
+  - 垄栽高畦种植利于排水
+
+crops:
+  - 草莓

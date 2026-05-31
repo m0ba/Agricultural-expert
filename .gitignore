@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.cache/
+*.log
+
+client/node_modules/
+client/dist/
+client/android/
+client/.capacitor/
+
+server/node_modules/
+server/data/records/
+server/data/experiments/
+server/data/weather_history/
+server/knowledge/user/_backups/

@@ -1,0 +1,114 @@
+# 白粉虱
+name: 白粉虱
+alias: 烟粉虱/小白蛾
+pathogen_type: 虫害
+pathogen_name: 温室白粉虱/烟粉虱
+crops: [番茄, 黄瓜, 辣椒, 茄子, 豆类]
+
+symptoms:
+  leaf: 叶片褪绿变黄，背面群集白色小虫，严重时叶片萎蔫枯死
+  stem: 生长点萎缩，新叶变小
+  plant: 分泌蜜露引发煤污病，传播病毒病（番茄黄化曲叶病毒等），减产10%-30%
+
+conditions:
+  temperature: "22-30°C"
+  humidity: "干燥环境"
+  season: 春秋季高发，温室全年发生
+  triggers: [高温干燥, 通风不良, 密植严重, 温室越冬]
+
+identification:
+  adult: 成虫体长约1-1.5mm，淡黄色，翅面覆盖白色蜡粉，停歇时呈屋脊状
+  nymph: 若虫扁平椭圆形，淡绿色或黄绿色，固定在叶背吸食汁液
+  pupa: 伪蛹期有明显边缘和触角结构
+  egg: 椭圆形，淡黄色，多产于叶片背面
+
+biology:
+  generations_per_year: 10-12代
+  life_cycle: 卵→若虫→伪蛹→成虫，约3周
+  reproduction: 单雌产卵100-200粒
+  overwinter: 温室内越冬，全年繁殖
+  migration: 春季由温室向露地迁飞扩散
+
+agricultural_control:
+  - 清洁田园，前茬收获后及时清除残株杂草
+  - 轮作倒茬，避免连作易感作物
+  - 合理密植，保持通风透光
+  - 选用抗性品种
+  - 防虫网隔离（60-80目）
+
+physical_control:
+  - 黄色粘虫板诱杀（每亩30-40块，悬挂于植株上方10-20cm）
+  - 银灰色地膜驱避
+  - 定期更换粘虫板
+
+biological_control:
+  - 释放丽蚜小蜂（每亩1000-2000头，7-10天一次，连续2-3次）
+  - 释放龟纹瓢虫、草蛉等天敌
+  - 使用微生物制剂：绿僵菌、球孢白僵菌
+
+chemical_control:
+  - name: 螺虫乙酯
+    dilution: 3000-4000倍
+    interval: 7-10天
+    method: 喷雾
+    note: 内吸传导，杀卵和若虫，持效期长
+  - name: 噻虫嗪
+    dilution: 5000-6000倍
+    interval: 5-7天
+    method: 喷雾
+    note: 烟碱类，触杀胃毒，开花期慎用
+  - name: 吡丙醚
+    dilution: 1000-1500倍
+    interval: 7-10天
+    method: 喷雾
+    note: 昆虫生长调节剂，专杀若虫和卵
+  - name: 呋虫胺
+    dilution: 1000-1500倍
+    interval: 7-10天
+    method: 喷雾
+    note: 第三代烟碱类，对抗性种群有效
+  - name: 氟啶虫酰胺
+    dilution: 2500倍
+    interval: 10天
+    method: 喷雾
+    note: 新型药剂，速效性好
+
+biological_pesticides:
+  - 苦参碱
+  - 除虫菊素
+  - 鱼藤酮
+  - 多杀菌素
+  - 阿维菌素
+
+combination_treatments:
+  - name: 苗期预防
+    formula: 噻虫嗪+吡丙醚
+    dilution: 各10克/桶水
+    timing: 定植缓苗后
+    note: 内吸传导，打一次管20天
+  - name: 爆发期速效
+    formula: 呋虫胺+氟啶虫酰胺
+    dilution: 各15克/桶水
+    timing: 傍晚施药
+    note: 速效+持效，成虫若虫兼治
+  - name: 抗性重灾区
+    formula: 螺虫乙酯+联苯菊酯
+    dilution: 各10克/桶水
+    timing: 添加助剂增强渗透
+    note: 专治抗性种群，持效30天
+
+application_tips:
+  - 重点喷施叶片背面
+  - 早晨或傍晚施药效果更佳
+  - 轮换用药避免抗药性
+  - 添加有机硅助剂增强渗透
+  - 注意安全间隔期
+
+risk_model:
+  temp_range: [22, 30]
+  humidity_threshold: 50
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "温度22-30°C + 湿度<50% + 田间已见白粉虱"
+    medium: "温度22-30°C + 适宜条件"
+    low: "其他情况"

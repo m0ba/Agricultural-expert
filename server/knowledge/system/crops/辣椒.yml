@@ -1,0 +1,235 @@
+# 辣椒 - 完整作物数据
+name: 辣椒
+family: 茄科
+latin_name: Capsicum annuum
+
+total_days: 180
+
+stages:
+  - name: 育苗期
+    order: 1
+    typical_days: 45
+    description: 从播种到定植前
+    key_points:
+      - 辣椒发芽需较高温度
+      - 苗期生长缓慢，需耐心管理
+      - 适当控水促壮苗
+      - 定植前炼苗
+    temperature:
+      day: "25-30°C"
+      night: "16-20°C"
+    watering: "控水蹲苗"
+    fertilization: "苗期轻施，不可浓肥"
+    pest_watch:
+      - 猝倒病
+      - 立枯病
+      - 蚜虫
+    detail_fields:
+      - name: 苗龄天数
+        type: stepper
+        min: 1
+        max: 60
+        step: 1
+      - name: 出苗情况
+        type: select
+        options: ["未出苗", "刚出苗", "出苗整齐", "出苗不齐"]
+      - name: 子叶状态
+        type: select
+        options: ["未展开", "刚展开", "完全展开", "发黄脱落"]
+      - name: 真叶数量
+        type: stepper
+        min: 0
+        max: 20
+        step: 1
+      - name: 茎秆表现
+        type: select
+        options: ["正常粗壮", "偏细徒长", "矮壮蹲苗"]
+      - name: 是否炼苗
+        type: select
+        options: ["未开始", "炼苗中", "炼苗完成"]
+
+  - name: 定植缓苗期
+    order: 2
+    typical_days: 12
+    description: 定植到缓苗完成
+    key_points:
+      - 浇透定根水
+      - 适当遮阳促缓苗
+      - 定植后第7天追施生根剂
+      - 及时查苗补苗
+    temperature:
+      day: "25-30°C"
+      night: "16-18°C"
+    watering: "定根水浇透"
+    fertilization: "缓苗后追施提苗肥"
+    pest_watch:
+      - 蚜虫
+      - 白粉虱
+      - 根腐病
+    detail_fields:
+      - name: 定植天数
+        type: stepper
+        min: 1
+        max: 30
+        step: 1
+      - name: 缓苗状态
+        type: select
+        options: ["未缓苗", "缓苗中", "缓苗完成"]
+      - name: 新叶生长
+        type: select
+        options: ["无变化", "心叶开始生长", "新叶展开2片以上"]
+      - name: 叶片表现
+        type: select
+        options: ["正常挺立", "轻微萎蔫", "严重萎蔫", "叶缘发黄"]
+      - name: 根系表现
+        type: select
+        options: ["未观察", "白根已扎出", "根系发达"]
+
+  - name: 初花期
+    order: 3
+    typical_days: 25
+    description: 第一朵花开放到门椒坐住
+    key_points:
+      - 门椒以下侧枝全部去除
+      - 注意温度管理促坐果
+      - 防止落花落果
+      - 门椒坐住后追肥
+    temperature:
+      day: "25-28°C"
+      night: "15-18°C"
+    watering: "初花期控水"
+    fertilization: "门椒膨大期追肥"
+    pest_watch:
+      - 疫病
+      - 灰霉病
+      - 病毒病
+    detail_fields:
+      - name: 花穗位置
+        type: stepper
+        min: 1
+        max: 10
+        step: 1
+      - name: 开花状态
+        type: select
+        options: ["现蕾", "花穗伸长", "花朵开放", "授粉完成"]
+      - name: 花朵数量
+        type: stepper
+        min: 0
+        max: 100
+        step: 1
+      - name: 花朵质量
+        type: select
+        options: ["花色正常", "花小色淡", "花多脱落", "未观察"]
+      - name: 坐果数量
+        type: stepper
+        min: 0
+        max: 100
+        step: 1
+      - name: 坐果情况
+        type: select
+        options: ["未坐果", "开始坐果", "坐果率偏低"]
+      - name: 侧枝状态
+        type: select
+        options: ["未处理", "已打杈", "需要打杈"]
+      - name: 植株高度
+        type: stepper
+        min: 10
+        max: 300
+        step: 5
+        unit: cm
+        reference: "初花期参考：50-100cm"
+
+  - name: 盛果期
+    order: 4
+    typical_days: 70
+    description: 持续坐果采收
+    key_points:
+      - 加强水肥管理
+      - 及时采收门椒促进后续坐果
+      - 预防日灼和脐腐
+      - 整枝通风防病
+    temperature:
+      day: "25-30°C"
+      night: "16-20°C"
+    watering: "保持土壤湿润"
+    fertilization: "每层果膨大期追肥"
+    pest_watch:
+      - 疫病
+      - 炭疽病
+      - 灰霉病
+      - 烟青虫
+    detail_fields:
+      - name: 果穗节位
+        type: stepper
+        min: 1
+        max: 20
+        step: 1
+      - name: 果实大小
+        type: select
+        options: ["幼果", "膨大初期", "膨大中期", "接近成熟"]
+      - name: 果实颜色
+        type: select
+        options: ["绿色", "开始转色", "转色50%", "成熟可采"]
+      - name: 果实品质
+        type: select
+        options: ["正常", "裂果", "畸形果", "日灼", "脐腐", "未观察"]
+      - name: 挂果数量
+        type: stepper
+        min: 0
+        max: 100
+        step: 1
+      - name: 植株高度
+        type: stepper
+        min: 10
+        max: 300
+        step: 5
+        unit: cm
+      - name: 植株长势
+        type: select
+        options: ["旺盛", "正常", "偏弱", "早衰迹象"]
+      - name: 叶片状态
+        type: select
+        options: ["正常", "下部老叶发黄", "大量落叶", "病斑可见"]
+
+  - name: 采收期
+    order: 5
+    typical_days: 40
+    description: 后期采收
+    key_points:
+      - 适时采收
+      - 后期加强追肥
+      - 注意植株更新
+    temperature:
+      day: "22-28°C"
+      night: "15-18°C"
+    watering: "后期适当控水"
+    fertilization: "追施高钾肥"
+    pest_watch:
+      - 炭疽病
+      - 软腐病
+    detail_fields:
+      - name: 采收阶段
+        type: select
+        options: ["始收期", "采收盛期", "采收后期"]
+      - name: 果实品质
+        type: select
+        options: ["优", "良", "一般", "较差"]
+      - name: 植株高度
+        type: stepper
+        min: 10
+        max: 300
+        step: 5
+        unit: cm
+      - name: 植株状态
+        type: select
+        options: ["正常挂果", "挂果减少", "叶片衰老", "准备拉秧"]
+
+diseases:
+  - 疫病
+  - 炭疽病
+  - 灰霉病
+  - 病毒病
+  - 软腐病
+  - 日灼病
+  - 脐腐病
+  - 蚜虫

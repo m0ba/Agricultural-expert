@@ -1,0 +1,31 @@
+# 葱蒜类 - 共性知识
+category: 葱蒜类
+
+common_traits:
+  temperature: 喜冷凉，适宜温度13-22°C
+  humidity: 适宜相对湿度60-70%
+  light: 需中等光照
+  soil: 喜疏松肥沃土壤
+  water: 需水适中，忌积水
+
+common_diseases:
+  - 灰霉病
+  - 疫病
+  - 锈病
+  - 霜霉病
+
+common_pests:
+  - 葱蓟马
+  - 蒜蛆
+  - 潜叶蝇
+
+management_points:
+  - 喜凉爽环境
+  - 注意排水防涝
+  - 适时收获保证品质
+  - 灰霉病高发需重点防控
+
+crops:
+  - 大蒜
+  - 洋葱
+  - 韭菜

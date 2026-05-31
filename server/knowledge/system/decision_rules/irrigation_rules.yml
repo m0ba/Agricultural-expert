@@ -1,0 +1,70 @@
+# 灌溉决策规则
+rules:
+  - rule_id: irrigation_high_temp
+    trigger:
+      crop_stage: [初花期, 盛果期]
+      weather:
+        temperature_max: { min: 30 }
+        precipitation_next_48h: { max: 5 }
+    action:
+      type: 灌溉
+      priority: 高
+      advice: "高温天气，建议傍晚灌溉"
+      conditions:
+        - "滴灌方式：每株200-300ml"
+        - "沟灌方式：每亩2-3方水"
+      warnings:
+        - "避免中午高温时段灌溉，防止根系应激"
+
+  - rule_id: irrigation_rain_forecast
+    trigger:
+      weather:
+        precipitation_next_48h: { min: 10 }
+    action:
+      type: 灌溉
+      priority: 低
+      advice: "未来48小时有较大降水概率，建议跳过本次灌溉"
+      conditions:
+        - "检查排水系统是否通畅"
+      warnings:
+        - "连续降雨注意防涝"
+
+  - rule_id: irrigation_normal
+    trigger:
+      crop_stage: [定植缓苗期]
+    action:
+      type: 灌溉
+      priority: 常规
+      advice: "缓苗期保持土壤湿润"
+      conditions:
+        - "滴灌方式：每株150-200ml"
+        - "每天早晚各一次"
+      warnings:
+        - "不可积水"
+
+  - rule_id: irrigation_seedling
+    trigger:
+      crop_stage: [育苗期]
+    action:
+      type: 灌溉
+      priority: 常规
+      advice: "苗期控水蹲苗，见干见湿"
+      conditions:
+        - "表土发白时少量浇水"
+      warnings:
+        - "不可大水漫灌"
+
+  - rule_id: irrigation_fruit
+    trigger:
+      crop_stage: [盛果期]
+      weather:
+        temperature_max: { min: 25, max: 32 }
+    action:
+      type: 灌溉
+      priority: 重要
+      advice: "盛果期保持充足水分供应"
+      conditions:
+        - "滴灌方式：每株250-350ml"
+        - "保持土壤湿润但不积水"
+      warnings:
+        - "忽干忽湿易导致裂果"

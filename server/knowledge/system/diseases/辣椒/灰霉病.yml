@@ -1,0 +1,57 @@
+# 灰霉病
+name: 灰霉病
+alias: 
+pathogen_type: 真菌
+pathogen_name: Botrytis cinerea
+crops: [番茄, 黄瓜, 辣椒, 草莓]
+
+symptoms:
+  flower: 花瓣水渍状腐烂，长灰色霉层
+  fruit: 果实从果蒂部开始水渍状腐烂，表面生灰色绒毛状霉
+  leaf: 叶片出现V形病斑，由叶尖向内扩展
+  stem: 茎部出现水渍状灰白色病斑
+
+conditions:
+  temperature: "15-25°C"
+  humidity: "相对湿度>90%持续时间长"
+  season: 冬春季设施内高发
+  triggers: [低温高湿, 通风不良, 残花未清理]
+
+agricultural_control:
+  - 及时摘除残花病果
+  - 通风排湿降低棚内湿度
+  - 适当提高棚温
+  - 滴灌避免叶面积水
+  - 覆盖地膜减少蒸发
+  - 及时整枝去老叶
+
+chemical_control:
+  - name: 异菌脲
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+  - name: 腐霉利
+    dilution: 1000倍
+    interval: 7天
+    method: 喷雾
+  - name: 嘧霉胺
+    dilution: 800倍
+    interval: 7天
+    method: 喷雾
+  - name: 啶酰菌胺
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 木霉菌
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [15, 25]
+  humidity_threshold: 90
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度15-25°C + 湿度>90% + 连续阴雨"
+    medium: "温度15-25°C + 湿度>80%"
+    low: "其他情况"

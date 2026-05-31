@@ -1,0 +1,56 @@
+# 炭疽病
+name: 炭疽病
+alias: 
+pathogen_type: 真菌
+pathogen_name: Colletotrichum spp.
+crops: [黄瓜, 辣椒]
+
+symptoms:
+  leaf: 叶片出现圆形褐色病斑，有同心轮纹
+  fruit: 果实出现凹陷褐色病斑，潮湿时有粉红色粘孢子
+  stem: 茎部出现长条形褐色凹陷斑
+
+conditions:
+  temperature: "22-28°C"
+  humidity: "相对湿度>80%"
+  season: 高温高湿季节
+  triggers: [高湿, 果实伤口, 连续降雨]
+
+agricultural_control:
+  - 通风降湿
+  - 避免果实机械损伤
+  - 及时采收
+  - 清除病残体
+  - 覆盖地膜
+  - 轮作
+
+chemical_control:
+  - name: 咪鲜胺
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+  - name: 苯醚甲环唑
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+  - name: 吡唑醚菌酯
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+  - name: 代森锰锌
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+
+biological_control:
+  - 枯草芽孢杆菌
+  - 木霉菌
+
+risk_model:
+  temp_range: [22, 28]
+  humidity_threshold: 80
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度22-28°C + 湿度>80% + 连续降雨"
+    medium: "温度22-28°C + 湿度>70%"
+    low: "其他情况"

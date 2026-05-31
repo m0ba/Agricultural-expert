@@ -1,0 +1,70 @@
+# 通风决策规则
+rules:
+  - rule_id: ventilation_high_temp
+    trigger:
+      weather:
+        temperature_max: { min: 32 }
+    action:
+      type: 通风
+      priority: 紧急
+      advice: "棚内温度即将超标，立即全面通风"
+      conditions:
+        - "打开顶部和侧面通风口"
+        - "有风机的开启风机"
+      warnings:
+        - "温度超过35°C需加开湿帘"
+
+  - rule_id: ventilation_humidity_high
+    trigger:
+      weather:
+        humidity_avg: { min: 85 }
+    action:
+      type: 通风
+      priority: 重要
+      advice: "棚内湿度过高，加强通风排湿"
+      conditions:
+        - "优先开顶部通风口"
+        - "低温时段适当减少通风时长"
+      warnings:
+        - "湿度过高易引发灰霉病、霜霉病"
+
+  - rule_id: ventilation_cold_night
+    trigger:
+      weather:
+        temperature_min: { max: 5 }
+    action:
+      type: 通风
+      priority: 重要
+      advice: "夜间温度过低，下午提前关闭通风口保温"
+      conditions:
+        - "15:00前关闭所有通风口"
+        - "有加温设备的提前开启"
+      warnings:
+        - "注意防冻，最低温度不应低于作物耐受温度"
+
+  - rule_id: ventilation_normal
+    trigger:
+      weather:
+        temperature_max: { min: 25, max: 32 }
+        humidity_avg: { min: 60, max: 80 }
+    action:
+      type: 通风
+      priority: 常规
+      advice: "天气适宜，正常通风管理"
+      conditions:
+        - "上午开棚通风，下午关棚"
+      warnings: []
+
+  - rule_id: ventilation_rain
+    trigger:
+      weather:
+        precipitation_next_12h: { min: 5 }
+    action:
+      type: 通风
+      priority: 重要
+      advice: "有降雨预报，提前关闭通风口防雨"
+      conditions:
+        - "关闭顶部和侧面通风口"
+        - "检查棚膜有无破损"
+      warnings:
+        - "雨水进入棚内易引发病害"

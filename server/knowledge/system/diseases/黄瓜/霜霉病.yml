@@ -1,0 +1,56 @@
+# 霜霉病
+name: 霜霉病
+alias: 跑马干
+pathogen_type: 真菌
+pathogen_name: Pseudoperonospora cubensis
+crops: [黄瓜]
+
+symptoms:
+  leaf: 叶片出现多角形黄色病斑，叶背生灰黑色霉层
+  stem: 严重时茎部也出现霉层
+  plant: 从下部叶片向上扩展，严重时叶片枯死
+
+conditions:
+  temperature: "15-22°C"
+  humidity: "相对湿度>85%"
+  season: 春秋季高发
+  triggers: [叶面结露, 通风不良, 昼夜温差大]
+
+agricultural_control:
+  - 控制棚内湿度
+  - 通风排湿
+  - 滴灌替代喷灌
+  - 及时摘除病叶
+  - 选用抗病品种
+  - 轮作
+
+chemical_control:
+  - name: 霜脲氰
+    dilution: 700倍
+    interval: 7天
+    method: 喷雾
+  - name: 烯酰吗啉
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+  - name: 甲霜灵锰锌
+    dilution: 600倍
+    interval: 7天
+    method: 喷雾
+  - name: 氟吡菌胺
+    dilution: 1000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 多抗霉素
+  - 木霉菌
+
+risk_model:
+  temp_range: [15, 22]
+  humidity_threshold: 85
+  rain_days_trigger: 2
+  risk_level_map:
+    high: "温度15-22°C + 湿度>85% + 连续阴雨"
+    medium: "温度15-22°C + 湿度>75%"
+    low: "其他情况"

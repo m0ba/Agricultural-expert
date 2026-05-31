@@ -1,0 +1,34 @@
+# 豆科 - 科属共性知识
+family: 豆科
+latin_name: Fabaceae
+
+common_traits:
+  temperature: 喜温，适宜温度白天20-28°C，夜间15-18°C
+  humidity: 适宜相对湿度60-70%
+  light: 喜光
+  soil: 适应性广，pH 6.0-7.5
+  water: 苗期控水，结荚期需水较多
+
+common_diseases:
+  - 锈病
+  - 根腐病
+  - 白粉病
+  - 炭疽病
+  - 病毒病
+
+common_pests:
+  - 豆荚螟
+  - 蚜虫
+  - 红蜘蛛
+  - 斑潜蝇
+
+management_points:
+  - 固氮作用可减少氮肥施用
+  - 花期保证充足水分
+  - 及时采收促进后续结荚
+  - 注意锈病防治
+
+crops:
+  - 豇豆
+  - 四季豆
+  - 荷兰豆

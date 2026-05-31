@@ -1,0 +1,56 @@
+# 白粉病
+name: 白粉病
+alias: 
+pathogen_type: 真菌
+pathogen_name: Sphaerotheca fuliginea / Erysiphe cichoracearum
+crops: [黄瓜, 草莓]
+
+symptoms:
+  leaf: 叶片正面出现白色粉状霉斑，后期变灰白色
+  stem: 严重时茎部也出现白粉
+  plant: 光合作用受阻，植株早衰
+
+conditions:
+  temperature: "16-24°C"
+  humidity: "相对湿度75%左右，干湿交替"
+  season: 全生育期
+  triggers: [通风不良, 氮肥过多, 干湿交替]
+
+agricultural_control:
+  - 通风透光
+  - 合理施肥避免偏氮
+  - 及时摘除病叶
+  - 选用抗病品种
+  - 适当增加湿度抑制孢子萌发
+  - 轮作
+
+chemical_control:
+  - name: 三唑酮
+    dilution: 1500倍
+    interval: 10天
+    method: 喷雾
+  - name: 苯醚甲环唑
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+  - name: 氟硅唑
+    dilution: 4000倍
+    interval: 10天
+    method: 喷雾
+  - name: 醚菌酯
+    dilution: 2000倍
+    interval: 10天
+    method: 喷雾
+
+biological_control:
+  - 武夷菌素
+  - 枯草芽孢杆菌
+
+risk_model:
+  temp_range: [16, 24]
+  humidity_threshold: 75
+  rain_days_trigger: 0
+  risk_level_map:
+    high: "温度16-24°C + 湿度60-80% + 干湿交替"
+    medium: "温度16-24°C + 适宜条件"
+    low: "其他情况"

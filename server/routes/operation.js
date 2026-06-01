@@ -3,7 +3,6 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
-import { loadKnowledge } from '../services/knowledgeLoader.js';
 import { stringify } from 'csv-stringify/sync';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -168,6 +167,8 @@ function deductInventory(type, name, amount) {
     console.error('[Inventory] Deduction failed:', err.message);
   }
 }
+
+import { loadKnowledge } from '../services/knowledgeLoader.js';
 
 // GET /api/operations/export
 router.get('/export', (req, res) => {

@@ -1,50 +1,13 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
-import { copyFileSync, cpSync, existsSync, mkdirSync, rmSync, readdirSync } from 'fs';
-import { resolve, dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-function copyNodeJSToDist() {
-  return {
-    name: 'copy-nodejs-to-dist',
-    closeBundle() {
-      const serverDir = resolve(__dirname, '..', 'server');
-      const distNodejsDir = resolve(__dirname, 'dist', 'nodejs');
-
-      console.log('\n📦 复制服务器代码到 dist/nodejs/ (CapacitorNodeJS nodeDir)...');
-
-      if (existsSync(distNodejsDir)) {
-        rmSync(distNodejsDir, { recursive: true, force: true });
-      }
-
-      mkdirSync(distNodejsDir, { recursive: true });
-
-      // 复制 server 目录内容到 dist/nodejs/（不是子目录）
-      const items = readdirSync(serverDir);
-      for (const item of items) {
-        if (item !== 'node_modules' && item !== '.git') {
-          const srcPath = join(serverDir, item);
-          const destPath = join(distNodejsDir, item);
-          cpSync(srcPath, destPath, { recursive: true });
-        }
-      }
-
-      console.log('✅ 服务器代码已复制到 dist/nodejs/');
-      console.log('⚠️  请运行: npm run prepare-nodejs 安装依赖\n');
-    }
-  };
-}
 
 export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'icons/*.png'],
+      includeAssets: ['favicon.svg', 'icons/*.svg'],
       manifest: {
         name: '农事专家 - 智能设施蔬菜种植决策系统',
         short_name: '农事专家',
@@ -55,16 +18,18 @@ export default defineConfig({
         orientation: 'portrait',
         start_url: '/',
         icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' }
+          { src: '/icons/icon-192.svg', sizes: '192x192', type: 'image/svg+xml' },
+          { src: '/icons/icon-512.svg', sizes: '512x512', type: 'image/svg+xml' }
         ]
       },
       workbox: {
+        // Only precache static assets, NOT JS/CSS — forces network-first for code
         globPatterns: ['**/*.{ico,png,svg,woff2}'],
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
+            // JS/CSS: always fetch fresh from network, fall back to cache
             urlPattern: /\.(?:js|css)$/i,
             handler: 'NetworkFirst',
             options: { cacheName: 'static-assets', expiration: { maxEntries: 50, maxAgeSeconds: 60 } }
@@ -91,18 +56,17 @@ export default defineConfig({
           }
         ]
       }
-    }),
-    copyNodeJSToDist()
+    })
   ],
-  build: {
-    rollupOptions: {
-      // 不需要external，Capacitor原生插件由框架自动处理
-    }
-  },
   server: {
     port: 5173,
     proxy: {
       '/api': { target: 'http://localhost:3000', changeOrigin: true }
+    }
+  },
+  build: {
+    rollupOptions: {
+      external: ['capacitor-plugin-nodejs']
     }
   }
 });

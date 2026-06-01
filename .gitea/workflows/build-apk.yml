@@ -14,37 +14,39 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
 
       - name: Setup Java 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'gradle'
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
       - name: Install client dependencies
         working-directory: client
-        run: |
-          npm install
-          npm install @capacitor/core @capacitor/cli @capacitor/android @nicokoenig/capacitor-nodejs
+        run: npm ci
 
       - name: Build frontend
         working-directory: client
         run: npm run build
 
-      - name: Init Capacitor
+      - name: Add Android platform
         working-directory: client
-        run: |
-          npx cap init "农事专家" "com.agriexpert.app" --web-dir dist
-          npx cap add android
+        run: npx cap add android
 
       - name: Copy backend to Android assets
         run: |
           mkdir -p client/android/app/src/main/assets/nodejs
-          cp -r server client/android/app/src/main/assets/nodejs/server
-          cp server/package.json client/android/app/src/main/assets/nodejs/package.json
+          cp -r server/* client/android/app/src/main/assets/nodejs/
+
+      - name: Install server dependencies
+        working-directory: client/android/app/src/main/assets/nodejs
+        run: npm ci --omit=dev
 
       - name: Sync Capacitor
         working-directory: client

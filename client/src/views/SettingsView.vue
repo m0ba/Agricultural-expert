@@ -1473,7 +1473,7 @@ async function editCropStage(crop) {
   const confirmed = await window.__modal.showConfirm(`确认将 ${crop.type} ${crop.variety_name} 的阶段修改为 ${newStage}？`, '确认修改');
   if (!confirmed) return;
   try {
-    await axios.put(`/api/crops/${crop.id}`, { current_stage: newStage, stage_detail: {} });
+    await axios.put(`/api/crops/${crop.id}`, { current_stage: newStage });
     await loadConfig();
   } catch (err) { window.__modal.showToast('修改失败', 'error'); }
 }
@@ -1514,13 +1514,7 @@ async function loadAddCropVarieties(cropType) {
 }
 
 async function loadAddCropStages(cropType) {
-  if (!cropType || cropType === '其他') {
-    addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
-    const defaults = getDefaultStageFields();
-    addCropStageDetailsMap.value = defaults;
-    addStageDetailFields.value = [];
-    return;
-  }
+  if (!cropType || cropType === '其他') { addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期']; addStageDetailFields.value = []; return; }
   try {
     const res = await axios.get(`/api/knowledge/crops/${cropType}`);
     if (res.data?.stages?.length) {
@@ -1531,42 +1525,12 @@ async function loadAddCropStages(cropType) {
       }
     } else {
       addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
-      addCropStageDetailsMap.value = getDefaultStageFields();
+      addCropStageDetailsMap.value = {};
     }
   } catch (e) {
     addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
-    addCropStageDetailsMap.value = getDefaultStageFields();
+    addCropStageDetailsMap.value = {};
   }
-}
-
-function getDefaultStageFields() {
-  return {
-    '育苗期': [
-      { name: '苗龄天数', type: 'stepper', min: 1, max: 60, step: 1 },
-      { name: '出苗情况', type: 'select', options: ['未出苗', '刚出苗', '出苗整齐', '出苗不齐'] },
-      { name: '苗情长势', type: 'select', options: ['健壮', '偏弱', '徒长', '蹲苗中'] }
-    ],
-    '定植缓苗期': [
-      { name: '定植天数', type: 'stepper', min: 1, max: 30, step: 1 },
-      { name: '缓苗状态', type: 'select', options: ['未缓苗', '缓苗中', '缓苗完成'] },
-      { name: '叶片表现', type: 'select', options: ['正常挺立', '轻微萎蔫', '严重萎蔫', '叶缘发黄'] }
-    ],
-    '初花期': [
-      { name: '开花状态', type: 'select', options: ['现蕾', '花朵开放', '授粉完成', '坐果中'] },
-      { name: '花朵数量', type: 'stepper', min: 0, max: 100, step: 1 },
-      { name: '侧枝状态', type: 'select', options: ['未处理', '已打杈', '需要打杈'] }
-    ],
-    '盛果期': [
-      { name: '果实状态', type: 'select', options: ['幼果', '膨大期', '接近成熟', '成熟可采'] },
-      { name: '挂果数量', type: 'stepper', min: 0, max: 100, step: 1 },
-      { name: '植株长势', type: 'select', options: ['旺盛', '正常', '偏弱', '早衰迹象'] }
-    ],
-    '采收期': [
-      { name: '采收阶段', type: 'select', options: ['始收期', '采收盛期', '采收后期'] },
-      { name: '果实品质', type: 'select', options: ['优', '良', '一般', '较差'] },
-      { name: '植株状态', type: 'select', options: ['正常挂果', '挂果减少', '叶片衰老', '准备拉秧'] }
-    ]
-  };
 }
 
 const addCropStageDetailsMap = ref({});
@@ -1579,27 +1543,23 @@ function onNewCropTypeChange() {
   const ct = newCrop.crop_type;
   if (ct && ct !== '其他') {
     loadAddCropVarieties(ct);
-    loadAddCropStages(ct).then(() => onNewStageChange());
+    loadAddCropStages(ct);
   } else {
     addCropVarieties.value = [];
     addCropStages.value = ['育苗期', '定植缓苗期', '初花期', '盛果期', '采收期'];
     addStageDetailFields.value = [];
     addCropStageDetailsMap.value = {};
-    onNewStageChange();
   }
 }
 
 function onNewStageChange() {
   newCrop.stage_detail = {};
   const stage = newCrop.current_stage;
-  const defaultFields = getDefaultStageFields();
-  const fields = addCropStageDetailsMap.value[stage] || defaultFields[stage] || [];
+  const fields = addCropStageDetailsMap.value[stage] || [];
   addStageDetailFields.value = fields;
   for (const field of fields) {
     if (field.type === 'stepper') {
       newCrop.stage_detail[field.name] = field.min || 0;
-    } else if (field.type === 'select') {
-      newCrop.stage_detail[field.name] = '';
     }
   }
 }
@@ -1665,7 +1625,7 @@ async function submitNewCrop() {
     const payload = {
       ...newCrop,
       crop_type: newCrop.crop_type === '其他' ? newCrop.custom_name : newCrop.crop_type,
-      variety_name: newCrop.variety_name === '其他' ? (newCrop.custom_variety_name || '其他') : newCrop.variety_name
+      variety_name: newCrop.variety_name === '其他' ? newCrop.custom_variety_name : newCrop.variety_name
     };
     await axios.post('/api/crops', payload);
     showAddCrop.value = false;

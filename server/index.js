@@ -26,8 +26,6 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const isNativePlatform = process.env.CAPACITOR_NODE_JS === 'true' || process.env.IS_NATIVE === '1';
-
 app.set('trust proxy', true);
 
 // Register weather plugins
@@ -37,24 +35,17 @@ pluginRegistry.register('weather', 'wttr', wttrPlugin);
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
-// Serve static files from client build (only in development mode)
-if (!isNativePlatform) {
-  // Static files: HTML should never be cached (service worker picks up new JS via new HTML)
-  app.use((req, res, next) => {
-    if (req.path.endsWith('.html') || req.path === '/' || req.path === '/setup') {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-    }
-    next();
-  });
-  app.use(express.static(join(__dirname, '..', 'client', 'dist'), { maxAge: '1h' }));
-
-  // SPA fallback (only in development)
-  app.get('*', (req, res) => {
-    res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
-  });
-}
+// Serve static files from client build
+// Static files: HTML should never be cached (service worker picks up new JS via new HTML)
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html') || req.path === '/' || req.path === '/setup') {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  next();
+});
+app.use(express.static(join(__dirname, '..', 'client', 'dist'), { maxAge: '1h' }));
 
 // API routes
 app.use('/api/weather', weatherRoutes);
@@ -71,16 +62,18 @@ app.use('/api/config', configRoutes);
 app.use('/api/decisions', decisionsRoutes);
 app.use('/api/init', initRoutes);
 
+// SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
+});
+
 // Error handler
 app.use((err, req, res, next) => {
   console.error('Server Error:', err.message);
   res.status(err.status || 500).json({ error: err.message || '服务器内部错误' });
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-  console.log(`农事专家服务器运行于 http://127.0.0.1:${PORT}`);
-  if (isNativePlatform) {
-    console.log('[Native] 运行在原生平台模式');
-  }
+app.listen(PORT, () => {
+  console.log(`农事专家服务器运行于 http://localhost:${PORT}`);
   initScheduler();
 });

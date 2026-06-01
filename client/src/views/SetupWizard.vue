@@ -666,11 +666,11 @@ function getStages(cropType) {
 
 // Stage detail fields from knowledge (reactive)
 const stageDetailCache = vueReactive({});
-const defaultStageFields = getDefaultStageDetailFields();
 function getStageDetailFields(cropType, stageName) {
   const cacheKey = `${cropType}_${stageName}`;
   if (stageDetailCache[cacheKey]) return stageDetailCache[cacheKey];
-  return defaultStageFields[stageName] || [];
+  // Will be loaded from knowledge
+  return [];
 }
 
 async function loadStageDetails(cropType) {
@@ -683,41 +683,8 @@ async function loadStageDetails(cropType) {
       }
     }
   } catch (e) {
-    const defaults = getDefaultStageDetailFields();
-    for (const [stageName, fields] of Object.entries(defaults)) {
-      stageDetailCache[`${cropType}_${stageName}`] = fields;
-    }
+    // Failed to load, will use empty arrays
   }
-}
-
-function getDefaultStageDetailFields() {
-  return {
-    '育苗期': [
-      { name: '苗龄天数', type: 'stepper', min: 1, max: 60, step: 1 },
-      { name: '出苗情况', type: 'select', options: ['未出苗', '刚出苗', '出苗整齐', '出苗不齐'] },
-      { name: '苗情长势', type: 'select', options: ['健壮', '偏弱', '徒长', '蹲苗中'] }
-    ],
-    '定植缓苗期': [
-      { name: '定植天数', type: 'stepper', min: 1, max: 30, step: 1 },
-      { name: '缓苗状态', type: 'select', options: ['未缓苗', '缓苗中', '缓苗完成'] },
-      { name: '叶片表现', type: 'select', options: ['正常挺立', '轻微萎蔫', '严重萎蔫', '叶缘发黄'] }
-    ],
-    '初花期': [
-      { name: '开花状态', type: 'select', options: ['现蕾', '花朵开放', '授粉完成', '坐果中'] },
-      { name: '花朵数量', type: 'stepper', min: 0, max: 100, step: 1 },
-      { name: '侧枝状态', type: 'select', options: ['未处理', '已打杈', '需要打杈'] }
-    ],
-    '盛果期': [
-      { name: '果实状态', type: 'select', options: ['幼果', '膨大期', '接近成熟', '成熟可采'] },
-      { name: '挂果数量', type: 'stepper', min: 0, max: 100, step: 1 },
-      { name: '植株长势', type: 'select', options: ['旺盛', '正常', '偏弱', '早衰迹象'] }
-    ],
-    '采收期': [
-      { name: '采收阶段', type: 'select', options: ['始收期', '采收盛期', '采收后期'] },
-      { name: '果实品质', type: 'select', options: ['优', '良', '一般', '较差'] },
-      { name: '植株状态', type: 'select', options: ['正常挂果', '挂果减少', '叶片衰老', '准备拉秧'] }
-    ]
-  };
 }
 
 function onStageChange(crop) {
@@ -727,8 +694,6 @@ function onStageChange(crop) {
     for (const field of fields) {
       if (field.type === 'stepper') {
         crop.stage_detail[field.name] = field.min || 0;
-      } else if (field.type === 'select') {
-        crop.stage_detail[field.name] = '';
       }
     }
   }
@@ -919,29 +884,29 @@ async function submitInit() {
   showConfirm.value = false;
   error.value = '';
   submitting.value = true;
-  const payload = {
-    cultivation_mode: form.cultivation_mode,
-    city: form.city,
-    city_source: form.city_source,
-    lat: form.lat,
-    lon: form.lon,
-    scale: form.scale,
-    greenhouses: form.greenhouses,
-    crops: form.crops.map(c => ({
-      ...c,
-      type: c.crop_type === '其他' ? c.custom_name : c.crop_type,
-      name: c.crop_type === '其他' ? c.custom_name : c.crop_type,
-      variety_name: c.variety_name === '其他' ? (c.custom_variety_name || '其他') : c.variety_name
-    })),
-    cultivation_method: form.cultivation_method,
-    soil: form.cultivation_method === '土壤栽培' ? form.soil : null,
-    substrate: form.cultivation_method === '基质栽培' ? form.substrate : null,
-    water_fertilizer: form.water_fertilizer,
-    equipment: { mode: form.equipment_mode, ...form.equipment },
-    history: { ...form.history },
-    ai: form.ai
-  };
   try {
+    const payload = {
+      cultivation_mode: form.cultivation_mode,
+      city: form.city,
+      city_source: form.city_source,
+      lat: form.lat,
+      lon: form.lon,
+      scale: form.scale,
+      greenhouses: form.greenhouses,
+      crops: form.crops.map(c => ({
+        ...c,
+        type: c.crop_type === '其他' ? c.custom_name : c.crop_type,
+        name: c.crop_type === '其他' ? c.custom_name : c.crop_type,
+        variety_name: c.variety_name === '其他' ? c.custom_variety_name : c.variety_name
+      })),
+      cultivation_method: form.cultivation_method,
+      soil: form.cultivation_method === '土壤栽培' ? form.soil : null,
+      substrate: form.cultivation_method === '基质栽培' ? form.substrate : null,
+      water_fertilizer: form.water_fertilizer,
+      equipment: { mode: form.equipment_mode, ...form.equipment },
+      history: { ...form.history },
+      ai: form.ai
+    };
     await axios.post('/api/init', payload, { timeout: 15000 });
     await store.fetchConfig();
     submitting.value = false;
@@ -950,28 +915,6 @@ async function submitInit() {
     }
     router.push('/');
   } catch (err) {
-    if (err.message === 'Network Error' && window.Capacitor?.isNativePlatform?.()) {
-      try {
-        await new Promise(r => setTimeout(r, 3000));
-        await axios.post('/api/init', payload, { timeout: 15000 });
-        await store.fetchConfig();
-        submitting.value = false;
-        if (window.__modal) {
-          await window.__modal.showAlert('配置已保存，即将进入系统', '初始化成功');
-        }
-        router.push('/');
-        return;
-      } catch (retryErr) {
-        submitting.value = false;
-        const msg = '无法连接服务器，服务可能正在启动中，请稍后重试';
-        if (window.__modal) {
-          window.__modal.showAlert(msg, '初始化失败');
-        } else {
-          error.value = msg;
-        }
-        return;
-      }
-    }
     submitting.value = false;
     const msg = err.code === 'ECONNABORTED'
       ? '服务器响应超时，请确认后端服务已启动'

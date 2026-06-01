@@ -2,8 +2,10 @@ node_modules/
 dist/
 .cache/
 *.log
+.dbg/
 
 client/node_modules/
+client/nodejs/
 client/android/
 client/.capacitor/
 

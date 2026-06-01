@@ -30,6 +30,11 @@ jobs:
         working-directory: client
         run: npm ci --legacy-peer-deps
 
+      - name: Fix capacitor-nodejs case-sensitivity (Bridge.h → bridge.h)   
+        run: |
+          NODEJS_CPP=client/node_modules/capacitor-nodejs/android/src/main/cpp
+          cp "$NODEJS_CPP/Bridge.h" "$NODEJS_CPP/bridge.h"
+
       - name: Install server dependencies
         working-directory: server
         run: npm ci --omit=dev

@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
-import { copyFileSync, cpSync, existsSync, mkdirSync, rmSync } from 'fs';
-import { resolve, dirname } from 'path';
+import { copyFileSync, cpSync, existsSync, mkdirSync, rmSync, readdirSync } from 'fs';
+import { resolve, dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -13,19 +13,28 @@ function copyNodeJSToDist() {
     name: 'copy-nodejs-to-dist',
     closeBundle() {
       const serverDir = resolve(__dirname, '..', 'server');
-      const distNodejsDir = resolve(__dirname, 'dist', 'nodejs', 'server');
+      const distNodejsDir = resolve(__dirname, 'dist', 'nodejs');
 
-      console.log('\n📦 复制服务器代码到 dist/nodejs/server/ ...');
+      console.log('\n📦 复制服务器代码到 dist/nodejs/ (CapacitorNodeJS nodeDir)...');
 
       if (existsSync(distNodejsDir)) {
         rmSync(distNodejsDir, { recursive: true, force: true });
       }
 
       mkdirSync(distNodejsDir, { recursive: true });
-      cpSync(serverDir, distNodejsDir, { recursive: true });
 
-      console.log('✅ 服务器代码已复制到 dist/nodejs/server/');
-      console.log('⚠️  请运行: cd dist/nodejs/server && npm ci --omit=dev\n');
+      // 复制 server 目录内容到 dist/nodejs/（不是子目录）
+      const items = readdirSync(serverDir);
+      for (const item of items) {
+        if (item !== 'node_modules' && item !== '.git') {
+          const srcPath = join(serverDir, item);
+          const destPath = join(distNodejsDir, item);
+          cpSync(srcPath, destPath, { recursive: true });
+        }
+      }
+
+      console.log('✅ 服务器代码已复制到 dist/nodejs/');
+      console.log('⚠️  请运行: npm run prepare-nodejs 安装依赖\n');
     }
   };
 }

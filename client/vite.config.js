@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
-import { copyFileSync, cpSync, existsSync, mkdirSync } from 'fs';
+import { copyFileSync, cpSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,7 +18,6 @@ function copyNodeJSToDist() {
       console.log('\n📦 复制服务器代码到 dist/nodejs/server/ ...');
 
       if (existsSync(distNodejsDir)) {
-        const { rmSync } = require('fs');
         rmSync(distNodejsDir, { recursive: true, force: true });
       }
 
@@ -88,7 +87,7 @@ export default defineConfig({
   ],
   build: {
     rollupOptions: {
-      external: ['@choreruiz/capacitor-node-js']
+      // 不需要external，Capacitor原生插件由框架自动处理
     }
   },
   server: {

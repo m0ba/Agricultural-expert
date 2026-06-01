@@ -1,14 +1,12 @@
 import { Router } from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
 import { stringify } from 'csv-stringify/sync';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
-const OPERATIONS_PATH = path.join(__dirname, '..', 'data', 'operations.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
+const OPERATIONS_PATH = path.join(DATA_DIR, 'operations.yml');
 
 function getOperations() { return readYaml(OPERATIONS_PATH) || []; }
 function saveOperations(ops) { return writeYaml(OPERATIONS_PATH, ops); }

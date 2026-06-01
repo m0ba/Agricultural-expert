@@ -28,24 +28,33 @@ jobs:
 
       - name: Install client dependencies
         working-directory: client
-        run: npm ci
+        run: npm ci --legacy-peer-deps
+
+      - name: Install server dependencies
+        working-directory: server
+        run: npm ci --omit=dev
 
       - name: Build frontend
         working-directory: client
         run: npm run build
 
+      - name: Copy backend to dist/nodejs
+        run: |
+          mkdir -p client/dist/nodejs
+          cp -r server/index.js server/package.json client/dist/nodejs/
+          cp -r server/routes client/dist/nodejs/
+          cp -r server/services client/dist/nodejs/
+          cp -r server/plugins client/dist/nodejs/
+          cp -r server/scheduler client/dist/nodejs/
+          cp -r server/knowledge client/dist/nodejs/
+          # Copy node_modules (pure JS deps, already installed by npm ci above)
+          cp -r server/node_modules client/dist/nodejs/
+          # Remove dev-only files
+          rm -rf client/dist/nodejs/node_modules/.cache
+
       - name: Add Android platform
         working-directory: client
         run: npx cap add android
-
-      - name: Copy backend to Android assets
-        run: |
-          mkdir -p client/android/app/src/main/assets/nodejs
-          cp -r server/* client/android/app/src/main/assets/nodejs/
-
-      - name: Install server dependencies
-        working-directory: client/android/app/src/main/assets/nodejs
-        run: npm ci --omit=dev
 
       - name: Sync Capacitor
         working-directory: client

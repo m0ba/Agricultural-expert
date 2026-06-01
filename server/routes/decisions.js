@@ -2,14 +2,12 @@ import { Router } from 'express';
 import { runRuleEngine } from '../services/ruleEngine.js';
 import { getCurrentWeather } from '../services/weatherService.js';
 import { readYaml } from '../services/yamlUtils.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
-const OPERATIONS_PATH = path.join(__dirname, '..', 'data', 'operations.yml');
-const DECISIONS_CACHE_PATH = path.join(__dirname, '..', 'data', 'decisions_cache.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
+const OPERATIONS_PATH = path.join(DATA_DIR, 'operations.yml');
+const DECISIONS_CACHE_PATH = path.join(DATA_DIR, 'decisions_cache.yml');
 
 const router = Router();
 

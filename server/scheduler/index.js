@@ -1,4 +1,6 @@
 import cron from 'node-cron';
+import path from 'path';
+import { DATA_DIR } from '../services/paths.js';
 
 let initialized = false;
 
@@ -51,9 +53,9 @@ export function initScheduler() {
     try {
       const { runRuleEngine } = await import('../services/ruleEngine.js');
       const { getCurrentWeather } = await import('../services/weatherService.js');
-      const { readYaml, writeYaml } = await import('./yamlUtils.js');
-      const config = readYaml(path.join(__dirname, '..', 'data', 'config.yml')) || {};
-      const operations = readYaml(path.join(__dirname, '..', 'data', 'operations.yml')) || [];
+      const { readYaml, writeYaml } = await import('../services/yamlUtils.js');
+      const config = readYaml(path.join(DATA_DIR, 'config.yml')) || {};
+      const operations = readYaml(path.join(DATA_DIR, 'operations.yml')) || [];
       
       const activeCrops = (config.crops || []).filter(c => c.status === 'active');
       if (activeCrops.length === 0) return;
@@ -61,7 +63,7 @@ export function initScheduler() {
       const weather = await getCurrentWeather();
       const decisions = runRuleEngine({ weather, crops: activeCrops, operations, config });
       
-      const decisionsPath = path.join(__dirname, '..', 'data', 'decisions_cache.yml');
+      const decisionsPath = path.join(DATA_DIR, 'decisions_cache.yml');
       writeYaml(decisionsPath, {
         decisions,
         timestamp: new Date().toISOString(),
@@ -78,8 +80,8 @@ export function initScheduler() {
     console.log(`[Scheduler] Auto AI analysis triggered at ${new Date().toISOString()}`);
     try {
       const { analyzeWithAI } = await import('../services/aiService.js');
-      const { readYaml, writeYaml } = await import('./yamlUtils.js');
-      const config = readYaml(path.join(__dirname, '..', 'data', 'config.yml')) || {};
+      const { readYaml, writeYaml } = await import('../services/yamlUtils.js');
+      const config = readYaml(path.join(DATA_DIR, 'config.yml')) || {};
       
       if (!config.ai?.enabled) {
         console.log('[Scheduler] AI not enabled, skipping');
@@ -87,7 +89,7 @@ export function initScheduler() {
       }
       
       const result = await analyzeWithAI(config.ai, {});
-      const resultsPath = path.join(__dirname, '..', 'data', 'ai_results.yml');
+      const resultsPath = path.join(DATA_DIR, 'ai_results.yml');
       const results = readYaml(resultsPath) || {};
       results.last_analysis = {
         data: result,

@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 const router = Router();
 

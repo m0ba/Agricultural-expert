@@ -1,15 +1,10 @@
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { readYaml, writeYaml, deepMerge } from './yamlUtils.js';
 import fs from 'fs';
+import { KNOWLEDGE_SYSTEM_DIR, KNOWLEDGE_USER_DIR } from './paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-
-const KNOWLEDGE_ROOT = path.join(__dirname, '..', 'knowledge');
-const SYSTEM_DIR = path.join(KNOWLEDGE_ROOT, 'system');
-const USER_DIR = path.join(KNOWLEDGE_ROOT, 'user');
+const SYSTEM_DIR = KNOWLEDGE_SYSTEM_DIR;
+const USER_DIR = KNOWLEDGE_USER_DIR;
 
 // In-memory cache for loaded knowledge
 let knowledgeCache = {};

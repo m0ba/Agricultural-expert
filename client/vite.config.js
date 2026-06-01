@@ -66,7 +66,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['capacitor-plugin-nodejs']
+      external: ['capacitor-nodejs']
     }
   }
 });

@@ -1,15 +1,13 @@
 import { Router } from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import archiver from 'archiver';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
 import { readCsv, writeCsv } from '../services/csvUtils.js';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const EXPERIMENTS_DIR = path.join(__dirname, '..', 'data', 'experiments');
+const EXPERIMENTS_DIR = path.join(DATA_DIR, 'experiments');
 const BOM = '\uFEFF';
 
 const router = Router();

@@ -7,12 +7,10 @@
 import { readYaml, writeYaml } from './yamlUtils.js';
 import { runRuleEngine } from './ruleEngine.js';
 import { getCurrentWeather, getWeatherHistory } from './weatherService.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from './paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 export async function dailyCalibration() {
   console.log('[Calibration] Starting daily calibration...');
@@ -55,7 +53,7 @@ export async function dailyCalibration() {
     console.log(`[Calibration] Generated ${decisions.length} decision cards for ${activeCrops.length} crops`);
 
     // Store calibration results
-    writeYaml(path.join(__dirname, '..', 'data', 'calibration.yml'), {
+    writeYaml(path.join(DATA_DIR, 'calibration.yml'), {
       date: today.toISOString().slice(0, 10),
       time: today.toISOString(),
       crops_count: activeCrops.length,

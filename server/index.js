@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { join } from 'path';
 import { initScheduler } from './scheduler/index.js';
 import weatherRoutes from './routes/weather.js';
 import greenhouseRoutes from './routes/greenhouse.js';
@@ -19,9 +18,7 @@ import pluginRegistry from './plugins/index.js';
 import openMeteoPlugin from './plugins/weather/openMeteo.js';
 import wttrPlugin from './plugins/weather/wttr.js';
 import initRoutes from './routes/init.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { STATIC_DIR } from './services/paths.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,7 +42,7 @@ app.use((req, res, next) => {
   }
   next();
 });
-app.use(express.static(join(__dirname, '..', 'client', 'dist'), { maxAge: '1h' }));
+app.use(express.static(STATIC_DIR, { maxAge: '1h' }));
 
 // API routes
 app.use('/api/weather', weatherRoutes);
@@ -64,7 +61,7 @@ app.use('/api/init', initRoutes);
 
 // SPA fallback
 app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, '..', 'client', 'dist', 'index.html'));
+  res.sendFile(join(STATIC_DIR, 'index.html'));
 });
 
 // Error handler

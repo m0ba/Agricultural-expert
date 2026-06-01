@@ -1,14 +1,10 @@
 import { loadKnowledge, loadKnowledgeDir } from './knowledgeLoader.js';
 import { readYaml } from './yamlUtils.js';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { DATA_DIR, KNOWLEDGE_SYSTEM_DIR } from './paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const RISK_MODELS_PATH = path.join(__dirname, '..', 'knowledge', 'system', 'diseases', 'risk_models.yml');
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const RISK_MODELS_PATH = path.join(KNOWLEDGE_SYSTEM_DIR, 'diseases', 'risk_models.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 /**
  * Run the rule engine with provided context.

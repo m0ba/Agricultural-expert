@@ -1,17 +1,15 @@
 import { Router } from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import { readCsv, writeCsv, exportCsv } from '../services/csvUtils.js';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const RECORDS_DIR = path.join(__dirname, '..', 'data', 'records');
-const EXPERIMENTS_DIR = path.join(__dirname, '..', 'data', 'experiments');
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
-const CUSTOM_METRICS_PATH = path.join(__dirname, '..', 'data', 'custom_metrics.yml');
+const RECORDS_DIR = path.join(DATA_DIR, 'records');
+const EXPERIMENTS_DIR = path.join(DATA_DIR, 'experiments');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
+const CUSTOM_METRICS_PATH = path.join(DATA_DIR, 'custom_metrics.yml');
 
 const DEFAULT_COLUMNS = [
   '日期', '品种', '品种名', '株高(cm)', '叶片数(片)', '茎粗(mm)',

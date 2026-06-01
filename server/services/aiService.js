@@ -5,13 +5,11 @@ import { readYaml, writeYaml } from './yamlUtils.js';
 import { loadKnowledge, loadKnowledgeDir } from './knowledgeLoader.js';
 import { runRuleEngine } from './ruleEngine.js';
 import { getCurrentWeather, getWeatherHistory, getWeatherSummary } from './weatherService.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from './paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const USAGE_PATH = path.join(__dirname, '..', 'data', 'ai_usage.yml');
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const USAGE_PATH = path.join(DATA_DIR, 'ai_usage.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 const SYSTEM_PROMPT = `你是设施蔬菜种植专家。根据以下数据，为【每个品种】分别给出今日的农事建议。
 数据中标注了[作物1]、[作物2]等编号，你必须为每个作物编号分别输出独立的分析结果。
@@ -91,7 +89,7 @@ async function buildContext(contextData) {
   const config = readYaml(CONFIG_PATH) || {};
   const weather = await getCurrentWeather();
   const history = await getWeatherHistory(7);
-  const operations = readYaml(path.join(__dirname, '..', 'data', 'operations.yml')) || [];
+  const operations = readYaml(path.join(DATA_DIR, 'operations.yml')) || [];
 
   const activeCrops = (config.crops || []).filter(c => c.status === 'active');
 

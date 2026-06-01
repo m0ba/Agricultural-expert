@@ -1,12 +1,10 @@
 import { Router } from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const TEMPLATES_PATH = path.join(__dirname, '..', 'data', 'templates.yml');
+const TEMPLATES_PATH = path.join(DATA_DIR, 'templates.yml');
 
 function getTemplates() { return readYaml(TEMPLATES_PATH) || []; }
 function saveTemplates(t) { return writeYaml(TEMPLATES_PATH, t); }

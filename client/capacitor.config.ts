@@ -10,7 +10,8 @@ const config = {
   },
   plugins: {
     NodeJS: {
-      nodeDir: 'nodejs'
+      nodeDir: 'nodejs',
+      startMode: 'manual'
     }
   }
 };

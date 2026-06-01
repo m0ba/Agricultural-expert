@@ -5,7 +5,6 @@ import App from './App.vue';
 import './assets/styles.css';
 
 function boot() {
-  // Mount Vue immediately — don't block the UI
   const app = createApp(App);
   app.use(createPinia());
   app.use(router);

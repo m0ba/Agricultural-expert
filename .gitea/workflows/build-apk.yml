@@ -30,8 +30,6 @@ jobs:
         working-directory: client
         run: npm ci --legacy-peer-deps
 
-      - name: Fix capacitor-nodejs case bug (Bridge.h → bridge.h)
-        run: cp client/node_modules/capacitor-nodejs/android/src/main/cpp/Bridge.h client/node_modules/capacitor-nodejs/android/src/main/cpp/bridge.h
 
       - name: Install server dependencies
         working-directory: server
@@ -51,23 +49,12 @@ jobs:
           cp -r server/scheduler client/dist/nodejs/
           cp -r server/knowledge client/dist/nodejs/
           cp -r server/node_modules client/dist/nodejs/
-          find client/dist/nodejs/node_modules -type f \( -name "*.md" -o -name "*.ts" -o -name "*.map" -o -name "*.d.ts" \) -delete
-          find client/dist/nodejs/node_modules -type d \( -name "test" -o -name "tests" -o -name "__tests__" -o -name "example" -o -name "examples" -o -name "docs" -o -name ".cache" \) -exec rm -rf {} + 2>/dev/null; true
-          find client/dist/nodejs/node_modules -type f -name "*.node" -delete 2>/dev/null; true
           rm -rf client/dist/nodejs/node_modules/.cache
 
       - name: Add Android platform
         working-directory: client
         run: npx cap add android
 
-      - name: Set arm64-v8a only (reduce APK size)
-        run: |
-          BUILD_GRADLE=client/android/app/build.gradle
-          if grep -q "abiFilters" "$BUILD_GRADLE"; then
-            echo "abiFilters already set"
-          else
-            sed -i '/defaultConfig {/a\        ndk { abiFilters "arm64-v8a" }' "$BUILD_GRADLE"
-          fi
 
       - name: Sync Capacitor
         working-directory: client

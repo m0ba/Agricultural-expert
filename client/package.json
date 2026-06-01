@@ -7,7 +7,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "prepare-nodejs": "node ../scripts/prepare-nodejs.js",
-    "build:apk": "npm run prepare-nodejs && npm run build && npx cap sync android && cd android && ./gradlew assembleDebug"
+    "build:apk": "npm run build && npm run prepare-nodejs && npx cap sync android && cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
     "vue": "^3.5.0",

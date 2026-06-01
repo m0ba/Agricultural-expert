@@ -8,8 +8,12 @@
           正在启动服务...({{ bootState.attempt }}/{{ bootState.maxAttempts }})
         </p>
         <template v-else>
-          <p class="boot-error">服务启动失败</p>
-          <p class="boot-hint">请检查：<br/>1. 设备存储空间是否充足<br/>2. 尝试关闭后重新打开应用</p>
+          <p class="boot-error">⚠️ 服务启动失败</p>
+          <div class="boot-error-details" v-if="bootState.errorDetails">
+            <small>错误: {{ bootState.errorDetails }}</small>
+          </div>
+          <p class="boot-hint">建议操作：<br/>1. 完全关闭应用后重新打开<br/>2. 检查设备存储空间（需要约200MB）<br/>3. 如果持续失败，请重新安装APK</p>
+          <button @click="retryBoot" class="boot-retry-btn">🔄 重试启动</button>
         </template>
       </div>
     </div>
@@ -52,7 +56,16 @@ import ModalDialog from './components/ModalDialog.vue';
 const route = useRoute();
 const showNav = computed(() => route.path !== '/setup');
 const modal = ref(null);
-const bootState = window.__bootState || { isNative: false, serverReady: true, bootFailed: false, attempt: 0, maxAttempts: 15 };
+const bootState = window.__bootState || { isNative: false, serverReady: true, bootFailed: false, attempt: 0, maxAttempts: 15, errorDetails: null };
+
+function retryBoot() {
+  if (bootState.bootFailed) {
+    bootState.bootFailed = false;
+    bootState.attempt = 0;
+    bootState.errorDetails = null;
+    window.location.reload();
+  }
+}
 
 onMounted(() => {
   if (modal.value) {

@@ -1,6 +1,35 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { VitePWA } from 'vite-plugin-pwa';
+import { copyFileSync, cpSync, existsSync, mkdirSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function copyNodeJSToDist() {
+  return {
+    name: 'copy-nodejs-to-dist',
+    closeBundle() {
+      const serverDir = resolve(__dirname, '..', 'server');
+      const distNodejsDir = resolve(__dirname, 'dist', 'nodejs', 'server');
+
+      console.log('\n📦 复制服务器代码到 dist/nodejs/server/ ...');
+
+      if (existsSync(distNodejsDir)) {
+        const { rmSync } = require('fs');
+        rmSync(distNodejsDir, { recursive: true, force: true });
+      }
+
+      mkdirSync(distNodejsDir, { recursive: true });
+      cpSync(serverDir, distNodejsDir, { recursive: true });
+
+      console.log('✅ 服务器代码已复制到 dist/nodejs/server/');
+      console.log('⚠️  请运行: cd dist/nodejs/server && npm ci --omit=dev\n');
+    }
+  };
+}
 
 export default defineConfig({
   plugins: [
@@ -23,13 +52,11 @@ export default defineConfig({
         ]
       },
       workbox: {
-        // Only precache static assets, NOT JS/CSS — forces network-first for code
         globPatterns: ['**/*.{ico,png,svg,woff2}'],
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api/],
         runtimeCaching: [
           {
-            // JS/CSS: always fetch fresh from network, fall back to cache
             urlPattern: /\.(?:js|css)$/i,
             handler: 'NetworkFirst',
             options: { cacheName: 'static-assets', expiration: { maxEntries: 50, maxAgeSeconds: 60 } }
@@ -56,7 +83,8 @@ export default defineConfig({
           }
         ]
       }
-    })
+    }),
+    copyNodeJSToDist()
   ],
   build: {
     rollupOptions: {

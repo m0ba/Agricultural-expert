@@ -441,3 +441,41 @@ html, body {
   line-height: 1.6;
   margin-top: 12px;
 }
+
+.boot-error-details {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  word-break: break-all;
+}
+
+.boot-error-details small {
+  color: var(--danger);
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.boot-retry-btn {
+  margin-top: 16px;
+  padding: 10px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.boot-retry-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(45, 125, 70, 0.3);
+}
+
+.boot-retry-btn:active {
+  transform: translateY(0);
+}

@@ -30,9 +30,6 @@ jobs:
         working-directory: client
         run: npm install --legacy-peer-deps
 
-      - name: Fix capacitor-nodejs case bug (Bridge.h → bridge.h)
-        run: cp client/node_modules/capacitor-nodejs/android/src/main/cpp/Bridge.h client/node_modules/capacitor-nodejs/android/src/main/cpp/bridge.h
-
       - name: Install server dependencies
         working-directory: server
         run: npm ci --omit=dev

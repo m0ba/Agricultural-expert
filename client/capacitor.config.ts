@@ -9,7 +9,7 @@ const config = {
     allowNavigation: ['localhost', '127.0.0.1']
   },
   plugins: {
-    NodeJS: {
+    CapacitorNodeJS: {
       nodeDir: 'nodejs',
       startMode: 'manual'
     }

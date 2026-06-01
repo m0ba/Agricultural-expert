@@ -50,9 +50,12 @@ jobs:
           cp -r server/plugins client/dist/nodejs/
           cp -r server/scheduler client/dist/nodejs/
           cp -r server/knowledge client/dist/nodejs/
+          # Copy node_modules (pure JS deps)
           cp -r server/node_modules client/dist/nodejs/
+          # ─── Strip node_modules bloat ───
           find client/dist/nodejs/node_modules -type f \( -name "*.md" -o -name "*.ts" -o -name "*.map" -o -name "*.d.ts" \) -delete
           find client/dist/nodejs/node_modules -type d \( -name "test" -o -name "tests" -o -name "__tests__" -o -name "example" -o -name "examples" -o -name "docs" -o -name ".cache" \) -exec rm -rf {} + 2>/dev/null; true
+          # Remove node-gyp / prebuild artifacts
           find client/dist/nodejs/node_modules -type f -name "*.node" -delete 2>/dev/null; true
           rm -rf client/dist/nodejs/node_modules/.cache
 

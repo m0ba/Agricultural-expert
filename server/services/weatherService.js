@@ -4,15 +4,12 @@
  */
 import { readYaml, writeYaml } from './yamlUtils.js';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import fs from 'fs';
 import pluginRegistry from '../plugins/index.js';
+import { DATA_DIR } from './paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const HISTORY_DIR = path.join(__dirname, '..', 'data', 'weather_history');
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const HISTORY_DIR = path.join(DATA_DIR, 'weather_history');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 let cachedWeather = null;
 let cacheTime = null;

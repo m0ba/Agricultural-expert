@@ -1,17 +1,15 @@
 import { Router } from 'express';
 import { loadKnowledge, loadKnowledgeDir } from '../services/knowledgeLoader.js';
 import { readYaml } from '../services/yamlUtils.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import archiver from 'archiver';
 import multer from 'multer';
 import unzipper from 'unzipper';
+import { KNOWLEDGE_SYSTEM_DIR, KNOWLEDGE_USER_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const userDir = path.join(__dirname, '..', 'knowledge', 'user');
+const userDir = KNOWLEDGE_USER_DIR;
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
@@ -34,7 +32,7 @@ router.get('/diseases', (req, res) => {
     crops = familyCrops[family] || [];
   } else {
     // Load crops from both system and user directories
-    const systemDiseasesDir = path.join(__dirname, '..', 'knowledge', 'system', 'diseases');
+    const systemDiseasesDir = path.join(KNOWLEDGE_SYSTEM_DIR, 'diseases');
     const userDiseasesDir = path.join(userDir, 'diseases');
     
     const cropSet = new Set();
@@ -78,7 +76,7 @@ router.get('/diseases', (req, res) => {
         ...disease,
         crop: cropName,
         key,
-        userDefined: !fs.existsSync(path.join(__dirname, '..', 'knowledge', 'system', 'diseases', cropName, `${key}.yml`))
+        userDefined: !fs.existsSync(path.join(KNOWLEDGE_SYSTEM_DIR, 'diseases', cropName, `${key}.yml`))
       });
     }
   }

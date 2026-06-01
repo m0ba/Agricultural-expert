@@ -1,11 +1,9 @@
 import { Router } from 'express';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 function getConfig() { return readYaml(CONFIG_PATH) || {}; }
 function saveConfig(config) { return writeYaml(CONFIG_PATH, config); }

@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 const router = Router();
 
@@ -58,11 +56,7 @@ router.delete('/', async (req, res) => {
   try {
     const fs = await import('fs');
     const pathMod = await import('path');
-    const { fileURLToPath } = await import('url');
-    const { dirname } = pathMod;
-    const __fn = fileURLToPath(import.meta.url);
-    const __dir = dirname(__fn);
-    const dataDir = pathMod.join(__dir, '..', 'data');
+    const dataDir = DATA_DIR;
 
     // Reset config.yml to empty
     writeYaml(CONFIG_PATH, {});

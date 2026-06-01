@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import { readYaml, writeYaml } from '../services/yamlUtils.js';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
+import { DATA_DIR } from '../services/paths.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const USAGE_PATH = path.join(__dirname, '..', 'data', 'ai_usage.yml');
-const RESULTS_PATH = path.join(__dirname, '..', 'data', 'ai_results.yml');
-const CONFIG_PATH = path.join(__dirname, '..', 'data', 'config.yml');
+const USAGE_PATH = path.join(DATA_DIR, 'ai_usage.yml');
+const RESULTS_PATH = path.join(DATA_DIR, 'ai_results.yml');
+const CONFIG_PATH = path.join(DATA_DIR, 'config.yml');
 
 const COOLDOWN_MS = 60 * 1000; // 1 minute cooldown between requests
 

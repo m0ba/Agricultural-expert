@@ -2,11 +2,9 @@ node_modules/
 dist/
 .cache/
 *.log
-.dbg/
-.github/workflows/build-apk.yml
 
 client/node_modules/
-client/nodejs/
+client/dist/
 client/android/
 client/.capacitor/
 
@@ -15,3 +13,5 @@ server/data/records/
 server/data/experiments/
 server/data/weather_history/
 server/knowledge/user/_backups/
+.github/workflows/build-apk.yml
+.github/workflows/main.yml

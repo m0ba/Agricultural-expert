@@ -3,6 +3,7 @@ dist/
 .cache/
 *.log
 .dbg/
+.github/workflows/build-apk.yml
 
 client/node_modules/
 client/nodejs/

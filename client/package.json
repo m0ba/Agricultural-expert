@@ -11,7 +11,7 @@
     "@capacitor/android": "^6.0.0",
     "@capacitor/core": "^6.0.0",
     "axios": "^1.7.0",
-    "capacitor-nodejs": "https://github.com/hampoelz/capacitor-nodejs/releases/download/v1.0.0-beta.10/capacitor-nodejs.tgz",
+    "capacitor-nodejs": "^0.0.1",
     "pinia": "^2.2.0",
     "vue": "^3.5.0",
     "vue-router": "^4.4.0"

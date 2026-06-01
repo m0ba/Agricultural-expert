@@ -76,9 +76,12 @@ jobs:
       - name: Make Gradlew executable
         run: chmod +x client/android/gradlew
 
+      - name: Clean Gradle cache
+        run: rm -rf ~/.gradle/caches/jars-9
+
       - name: Build APK
         working-directory: client/android
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

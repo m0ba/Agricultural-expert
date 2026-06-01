@@ -43,13 +43,24 @@ jobs:
         working-directory: client
         run: npm install
 
-      - name: Install server production dependencies
-        working-directory: server
-        run: npm ci --omit=dev
-
       - name: Build frontend
         working-directory: client
         run: npm run build
+
+      - name: Prepare Node.js for APK
+        working-directory: client
+        run: npm run prepare-nodejs
+
+      - name: Verify nodejs directory
+        run: |
+          echo "=== dist/nodejs/ ==="
+          ls client/dist/nodejs/
+          echo ""
+          echo "=== index.js exists? ==="
+          test -f client/dist/nodejs/index.js && echo "OK" || echo "MISSING!"
+          echo ""
+          echo "=== node_modules exists? ==="
+          test -d client/dist/nodejs/node_modules && echo "OK" || echo "MISSING!"
 
       - name: Add Android platform
         working-directory: client
@@ -57,19 +68,6 @@ jobs:
           if [ ! -d "android" ]; then
             npx cap add android
           fi
-
-      - name: Prune server node_modules
-        working-directory: server/node_modules
-        run: |
-          find . -type d \( -name "test" -o -name "tests" -o -name "__tests__" -o -name "example" -o -name "examples" -o -name "docs" -o -name ".github" -o -name "benchmark" \) -exec rm -rf {} + 2>/dev/null || true
-          find . -type f \( -name "*.md" -o -name "*.ts" -o -name "*.map" -o -name "CHANGELOG*" -o -name "LICENSE*" -o -name ".npmignore" -o -name ".eslintrc*" -o -name ".prettierrc*" -o -name "tsconfig*" -o -name "*.d.ts" \) -exec rm -f {} + 2>/dev/null || true
-
-      - name: Copy backend to Android assets
-        run: |
-          mkdir -p client/android/app/src/main/assets/nodejs
-          cp -r server client/android/app/src/main/assets/nodejs/server
-          rm -rf client/android/app/src/main/assets/nodejs/server/node_modules/.cache 2>/dev/null || true
-          cp server/package.json client/android/app/src/main/assets/nodejs/package.json
 
       - name: Sync Capacitor
         working-directory: client

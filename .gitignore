@@ -13,5 +13,3 @@ server/data/records/
 server/data/experiments/
 server/data/weather_history/
 server/knowledge/user/_backups/
-.github/workflows/build-apk.yml
-.github/workflows/main.yml
